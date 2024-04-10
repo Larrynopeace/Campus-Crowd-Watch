@@ -12,7 +12,7 @@ export default function (success, err) {
     // 3. connect to mongoDB (27017 is the default port for MongoDB, *** is the name of the database, you can change it to your own database name)
     // *You will need to create a file as the path of the database files in your disk
     //mongoose.connect('mongodb://localhost:27017/***');
-    mongoose.connect('mongodb://127.0.0.1:27017/***');
+    mongoose.connect('mongodb+srv://Larry:larry123456@larry-info310.rm5fdxk.mongodb.net/?retryWrites=true&w=majority&appName=Larry-INFO310');
 
     // 4. set the connection
     // 4.1. connect successfully
