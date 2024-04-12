@@ -1,0 +1,80 @@
+
+.header {
+    text-align: center; /* Center text */
+    margin-top: 0; /* Remove default margin */
+    position: fixed; /* Stick the title to the top */
+    top: 0; /* Stick it to the top */
+    width: 100%; /* Make it take full width */
+    background-color: white; /* Optionally, add a background color */
+    padding: 30px 0;
+
+}
+
+h1 {
+    font-size: 70px;
+}
+
+h2 {
+    padding-left: 10px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.hero {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; /* Set image width to 100% of its container */
+    padding-left: 200px;
+  }
+
+img {
+    width: auto; /* Change 100px to your desired width */
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    display: flex;
+    margin-top: 50px; 
+    padding: 0 50px;
+  }
+  
+  .card {
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  .navbar {
+    background-color: #333; /* Background color of the navbar */
+    position: fixed; /* Fix the navbar at the top */
+    width: 100%; /* Make the navbar take full width */
+    top: 0; /* Stick it to the top */
+  }
+  
+  .navbar-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Make the list items horizontal */
+    justify-content: center; /* Center the items horizontally */
+  }
+  
+  .navbar-item {
+    margin-right: 20px; /* Add space between navbar items */
+  }
+  
+  .navbar-link {
+    color: white; /* Color of the links */
+    text-decoration: none; /* Remove underline */
+    padding: 10px; /* Add padding around links */
+    font-size: 20px;
+  }
+  
+  .navbar-link:hover {
+  }
