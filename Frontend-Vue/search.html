@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Facilities Search</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Search bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search facilities" onkeyup="searchFacilities()">
+  </div>
+
+  <!-- Facilities list -->
+  <div id="facilitiesList">
+    <h2>Facilities</h2>
+    <ul>
+      <li>Business School</li>
+      <li>Central Library</li>
+      <li>Unipol Recreation Center</li>
+
+    </ul>
+  </div>
+
+  <script>
+    function searchFacilities() {
+      // Get input
+      var input = document.getElementById("searchInput");
+      var filter = input.value.toUpperCase();
+      
+      // Get list of facilities
+      var facilitiesList = document.getElementById("facilitiesList");
+      var facilities = facilitiesList.getElementsByTagName("li");
+
+      for (var i = 0; i < facilities.length; i++) {
+        var facility = facilities[i];
+        var textValue = facility.textContent || facility.innerText;
+        if (textValue.toUpperCase().indexOf(filter) > -1) {
+          facility.style.display = "";
+        } else {
+          facility.style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
