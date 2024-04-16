@@ -10,8 +10,7 @@ const app = express();
 // *Import cors to allow cross origin requests, because we are running on localhost:3000 and our vue app is running on localhost:5173
 import cors from "cors";
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
 
 // Import mongodb-setting.js
 import db from "./MongoDB/Mongodb-setting/mongodb-setting.js";
