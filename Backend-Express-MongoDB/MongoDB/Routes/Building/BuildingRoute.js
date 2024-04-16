@@ -1,10 +1,10 @@
-    import { Router } from "express";
+import { Router } from "express";
 
-    import BuildingModel from "./models/BuildingModel.js";
+import BuildingModel from "../../Models/BuildingModel.js";
 
-    const router = Router();
+const router = Router();
 
-    router.get("/api/buildings", async (req, res) => {
+router.get("/api/buildings", async (req, res) => {
     try {
         const buildings = await BuildingModel.find({});
         res.send(buildings);
@@ -12,6 +12,6 @@
         console.error("Error occurred:", err);
         res.status(500).send("Internal Server Error");
     }
-    });
+});
 
-    export default router;
+export default router;

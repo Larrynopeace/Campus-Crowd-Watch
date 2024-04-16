@@ -12,10 +12,11 @@ import cors from "cors";
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 // Import mongodb-setting.js
 import db from "./MongoDB/Mongodb-setting/mongodb-setting.js";
+import router from "./Router/BuildingRouter.js";
 
-import router from "./router.js";
 // Connect to mongoDB
 db(
   () => {

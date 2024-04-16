@@ -1,5 +1,8 @@
-import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+/* import mongoose from "mongoose";
+
+const { Schema, model } = mongoose; */
+
+import { Schema, model } from 'mongoose';
 
 const yourSchemaNameSchema = new Schema({
   image_url: { type: String, required: true },
@@ -8,6 +11,7 @@ const yourSchemaNameSchema = new Schema({
   Max_Occupancy: { type: Number, required: true },
 });
 
-const BuildingModel = mongoose.model("BuildingModel", yourSchemaNameSchema);
+// "BuildingModel" will be the name of the collection in the database
+const BuildingModel = model("BuildingModel123", yourSchemaNameSchema);
 
 export default BuildingModel;
