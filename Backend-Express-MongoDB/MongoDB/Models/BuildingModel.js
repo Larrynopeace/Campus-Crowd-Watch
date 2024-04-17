@@ -10,6 +10,7 @@ const yourSchemaNameSchema = new Schema({
   Building_name: { type: String, required: true },
   Max_Occupancy: { type: Number, required: true },
   Current_Occupancy: { type: Number, required: true },
+  building_id: { type: String, required: true },
 });
 
 // "BuildingModel" will be the name of the collection in the database
