@@ -27,6 +27,7 @@ router.get("/api/buildings", async (req, res) => {
 //         res.status(500).send("Internal Server Error");
 //     }
 // });
+
 // Get a single building by ID
 router.get("/api/buildings/:building_id", async (req, res) => {
     try {

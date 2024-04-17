@@ -14,12 +14,17 @@ app.use(cors());
 
 // Import mongodb-setting.js
 import db from "./MongoDB/Mongodb-setting/mongodb-setting.js";
-import router from "./Router/BuildingRouter.js";
+import buildingRouter from "./Router/BuildingRouter.js";
+import occupancyRouter from "./Router/OccupancyRouter.js";
 
 // Connect to mongoDB
 db(
   () => {
-    app.use(router);
+
+    // Mounting the routers
+    app.use(buildingRouter);
+    app.use(occupancyRouter);
+    
     console.log("Connection succeeded");
   },
   () => {
