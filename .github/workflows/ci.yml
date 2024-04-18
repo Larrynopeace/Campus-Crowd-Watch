@@ -18,8 +18,8 @@ jobs:
       with:
         node-version: '20'  # Specify the Node.js version
         
-    - name: working directory and set up
-      working-directory: ./Frontend-Vue/
-      run: | 
-       npm install
-       npm run dev 
+    #- name: working directory and set up
+     # working-directory: ./Frontend-Vue/
+      #run: | 
+     #  npm install
+      # npm run dev 
