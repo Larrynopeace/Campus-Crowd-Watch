@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration Form</title>
+  </head>
+  <body>
+    <h2>User Registration</h2>
+    <form id="userForm">
+      <label for="username">Username:</label><br />
+      <input type="text" id="username" name="username" required /><br />
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" required /><br />
+      <label for="firstName">First Name:</label><br />
+      <input type="text" id="firstName" name="firstName" required /><br />
+      <label for="lastName">Last Name:</label><br />
+      <input type="text" id="lastName" name="lastName" required /><br />
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+          var test = false;
+          if (
+            document
+              .getElementById("email")
+              .value.toLowerCase()
+              .endsWith("@otago.ac.nz")
+          ) {
+            test = true;
+          }
+          // Get form data
+          const formData = {
+            username: document.getElementById("username").value,
+            email: document.getElementById("email").value,
+            first_name: document.getElementById("firstName").value,
+            last_name: document.getElementById("lastName").value,
+            password: document.getElementById("password").value,
+            is_staff: test,
+            favorite_buildings: [],
+          };
+          console.log("Form data:", formData);
+
+          // Send POST request to backend
+          axios
+            .post("http://localhost:3000/api/users", formData)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        });
+    </script>
+  </body>
+</html>

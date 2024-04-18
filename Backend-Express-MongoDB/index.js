@@ -22,6 +22,7 @@ db(
   () => {
 
     // Mounting the routers
+    app.use(express.json());
     app.use(buildingRouter);
     app.use(occupancyRouter);
     
