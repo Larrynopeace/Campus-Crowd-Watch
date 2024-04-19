@@ -10,7 +10,7 @@
   <body>
     
    <!--<div id="app"></div>-->
-    <script type="module" src="/src/main.js"></script>
+   <!-- <script type="module" src="/src/main.js"></script>-->
     <div class="row header">
         <h1 class="title"> Locations </h1>
         <h3>Take a look at the avaliabilty of your favorite spots around campus!</h3>
@@ -29,12 +29,28 @@
 
     <div class="container">
 
+      <!-- buildings.ejs -->
+
+  <div class="building-cards">
+    <% buildings.forEach(building => { %>
+      <div class="card">
+        <h2><%= building.Building_Name %></h2>
+        <img src="<%= building.image_url %>" alt="<%= building.Building_Name %> Image">
+      </div>
+    <% }) %>
+  </div>
+
+
+    </div>
+
+  <!-- <div class="container">
+
       <div class="row">
       <div class="card">
         <img src="../../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Business School</b></h2><br>
-         <!-- <p>Architect & Engineer</p>-->
+      
         </div>
       </div>
     
@@ -42,7 +58,6 @@
         <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Central Library</b></h2><br>
-        <!--<p>Architect & Engineer</p>-->
         </div>
       </div>
     
@@ -50,7 +65,6 @@
         <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Unipol Recreation Center</b></h2><br>
-        <!-- <p>Architect & Engineer</p>-->
         </div>
       </div>
     </div>
@@ -60,7 +74,6 @@
         <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Business School</b></h2><br>
-            <!--<p>Architect & Engineer</p>-->
         </div>
       </div>
     
@@ -68,7 +81,6 @@
         <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Central Library</b></h2><br>
-            <!--<p>Architect & Engineer</p>-->
         </div>
       </div>
     
@@ -76,10 +88,11 @@
         <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
         <div class="text-area">
           <h2><b>Unipol Recreation Center</b></h2><br>
-        <!--<p>Architect & Engineer</p>-->
         </div>
       </div>
       </div>
-    </div>
+    </div>-->
+
+    <script src="locations.js"></script>
   </body>
 </html>
