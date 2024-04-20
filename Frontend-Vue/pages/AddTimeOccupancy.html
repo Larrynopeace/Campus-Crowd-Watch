@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Building Occupancy</title>
+  </head>
+  <body>
+    <form id="updateForm">
+      <label for="time">Time</label><br />
+      <input type="datetime-local" id="currentTime" name="currentTime" />
+      <br />
+      <label for="building_id">Building Name:</label><br />
+      <select
+        id="building_id"
+        name="building_id"
+        onchange="updateOccupancy()"
+      ></select
+      ><br />
+      <label for="Current_Occupancy">Current Occupancy:</label><br />
+      <input
+        type="number"
+        id="Current_Occupancy"
+        name="Current_Occupancy"
+      /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+      // Fetch all buildings and populate the dropdown
+      window.onload = function () {
+        document.getElementById("currentTime").value = new Date()
+          .toISOString()
+          .slice(0, 16);
+        fetch("http://localhost:3000/api/buildings")
+          .then((response) => response.json())
+          .then((data) => {
+            const select = document.getElementById("building_id");
+            data.forEach((building) => {
+              const option = document.createElement("option");
+              console.log(building);
+              option.value = building.building_id;
+              option.text = building.Building_Name;
+              select.add(option);
+            });
+            updateOccupancy();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      };
+
+      // Update the Current_Occupancy input field when a building is selected
+      function updateOccupancy() {
+        const building_id = document.getElementById("building_id").value;
+        fetch(`http://localhost:3000/api/buildings/${building_id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("Current_Occupancy").value =
+              data.Current_Occupancy;
+            document.getElementById("Current_Occupancy").min = 0;
+            document.getElementById("Current_Occupancy").max =
+              data.Max_Occupancy;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      // Send a PUT request when the form is submitted
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const b_id = document.getElementById("building_id").value;
+          var building;
+          var building_id;
+
+          fetch(`http://localhost:3000/api/buildings/${b_id}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // You now have the building data and can use it for your POST request
+              building = data.Building_Name;
+              building_id = data._id;
+
+              const occupancy =
+                document.getElementById("Current_Occupancy").value;
+              const time = document.getElementById("currentTime").value;
+
+              fetch("http://localhost:3000/api/occupancy", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  building,
+                  building_id,
+                  occupancy,
+                  time
+                }),
+              })
+                .then((response) => response.json())
+                .then((data) => console.log(data))
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

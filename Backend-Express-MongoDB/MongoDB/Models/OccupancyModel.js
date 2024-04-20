@@ -27,7 +27,9 @@ const OccupancySchema = new Schema({
         ref: 'building_live_occupancies',
         required: true,
     }, 
-});
+}
+//{ versionKey: false }
+);
 
 const OccupancyModel = model("time_occupancies", OccupancySchema);
 

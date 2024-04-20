@@ -31,10 +31,11 @@ router.get("/api/occupancy/:building", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 router.post("/api/occupancy", async (req, res) => {
   try {
-    const { building_id, occupancy, time, building } = req.body;
-    const newOccupancy = new OccupancyModel({ building_id, occupancy, time, building });
+    const newOccupancy = new OccupancyModel(req.body);
     const savedOccupancy = await newOccupancy.save();
     res.status(201).send(savedOccupancy);
   } catch (err) {
