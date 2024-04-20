@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Login</title>
-    <!-- Include any necessary CSS files here -->
-  </head>
-  <body>
-    <h2>User Login</h2>
-    
-    <form id="loginForm">
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" required /><br />
-      <label for="password">Password:</label><br />
-      <input type="password" id="password" name="password" required /><br />
-      <button type="submit">Login</button>
-    </form>
 
-    <!-- Include Axios for HTTP requests -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
- 
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="main.css">
+  <title>User Login</title>
+  <!-- Include any necessary CSS files here -->
+</head>
 
-          // get login credentials
-          const loginData = {
-            username: document.getElementById("username").value,
-            password: document.getElementById("password").value,
-          };
+<body>
 
-          // Send POST request to backend to validate login
-          axios
-            .post("http://localhost:3000/api/login", loginData) 
-            .then(function (response) {
-              console.log("Login successful:", response.data);
+  <nav class="navbar">
+    <ul class="navbar-list">
+      <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
+      <li class="navbar-item"><a href="locations.html" class="navbar-link">Locations</a></li>
+      <li class="navbar-item"><a href="createAccount.html" class="navbar-link">Create Account</a></li>
+    </ul>
+  </nav>
 
-              sessionStorage.setItem("user", JSON.stringify(response.data));
+  <div class="login-modal"> 
+    <div class="login-content"> 
+      <h2>Login to Campus Crowd Watch</h2>
 
-              window.location.href = "index.html"; 
-            })
-            .catch(function (error) {
-              console.error("Login failed:", error.response.data);
-              alert("Invalid username or password"); 
-            });
-        });
-    </script>
-  </body>
+      <form id="loginForm"> 
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required> 
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required> 
+
+        <button type="submit" class="login-button">Login</button> 
+      </form>
+      <div class="register-link"> <!-- Link to create account -->
+        Don't have an account? <a href="createAccount.html">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include Axios for HTTP requests -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // get login credentials
+        const loginData = {
+          username: document.getElementById("username").value,
+          password: document.getElementById("password").value,
+        };
+
+        // Send POST request to backend to validate login
+        axios
+          .post("http://localhost:3000/api/login", loginData)
+          .then(function (response) {
+            console.log("Login successful:", response.data);
+
+            sessionStorage.setItem("user", JSON.stringify(response.data));
+
+            window.location.href = "index.html";
+          })
+          .catch(function (error) {
+            console.error("Login failed:", error.response.data);
+            alert("Invalid username or password. Please try again!");
+          });
+      });
+  </script>
+</body>
+
 </html>
