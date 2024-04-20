@@ -31,7 +31,7 @@
             data.forEach((building) => {
               const option = document.createElement("option");
               console.log(building);
-              option.value = building.building_id;
+              option.value = building._id;
               option.text = building.Building_Name;
               select.add(option);
             });

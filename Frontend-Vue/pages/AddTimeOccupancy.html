@@ -37,7 +37,7 @@
             data.forEach((building) => {
               const option = document.createElement("option");
               console.log(building);
-              option.value = building.building_id;
+              option.value = building._id;
               option.text = building.Building_Name;
               select.add(option);
             });
@@ -70,43 +70,27 @@
         .addEventListener("submit", function (event) {
           event.preventDefault();
 
-          const b_id = document.getElementById("building_id").value;
-          var building;
-          var building_id;
+          const building_id = document.getElementById("building_id").value;
+          console.log(building_id);
+          const building = document.getElementById("building_id").textContent;
+          const occupancy = document.getElementById("Current_Occupancy").value;
+          const time = document.getElementById("currentTime").value;
 
-          fetch(`http://localhost:3000/api/buildings/${b_id}`)
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-              }
-              return response.json();
-            })
+          fetch("http://localhost:3000/api/occupancy", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              building,
+              building_id,
+              occupancy,
+              time,
+            }),
+          })
+            .then((response) => response.json())
             .then((data) => {
-              // You now have the building data and can use it for your POST request
-              building = data.Building_Name;
-              building_id = data._id;
-
-              const occupancy =
-                document.getElementById("Current_Occupancy").value;
-              const time = document.getElementById("currentTime").value;
-
-              fetch("http://localhost:3000/api/occupancy", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  building,
-                  building_id,
-                  occupancy,
-                  time
-                }),
-              })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
-                .catch((error) => {
-                  console.error("Error:", error);
-                });
+              console.log("Success:", data);
             })
             .catch((error) => {
               console.error("Error:", error);
