@@ -46,9 +46,12 @@ router.get("/api/buildings/:building_id", async (req, res) => {
 router.put("/api/buildings/:building_id", async (req, res) => {
     try {
         const { building_id } = req.params;
-        const update = req.body; // Assuming the request body contains the updated information
-
-        const updatedBuilding = await BuildingModel.findByIdAndUpdate(building_id, update, { new: true });
+        const update = req.body.Current_Occupancy; // Assuming the request body contains the updated information
+        const updatedBuilding = await BuildingModel.findOneAndUpdate(
+            { building_id: building_id },
+            { Current_Occupancy: update },
+            { new: true }
+          );
         // { new: true } option returns the updated document
 
         if (!updatedBuilding) {

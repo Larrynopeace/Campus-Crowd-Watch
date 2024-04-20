@@ -39,4 +39,21 @@ router.post("/api/users", async (req, res) => {
   }
 });
 
+router.put("/api/users/:username/favorite_buildings", async (req, res) => {
+  try {
+    const { buildingId } = req.body;
+    const user = await UserModel.findOneAndUpdate(
+      { username: req.params.username },
+      { $addToSet: { favorite_buildings: buildingId } },
+      { new: true, useFindAndModify: false }
+    );
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.send(user);
+  } catch (err) {
+    console.error("Error occurred:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 export default router;

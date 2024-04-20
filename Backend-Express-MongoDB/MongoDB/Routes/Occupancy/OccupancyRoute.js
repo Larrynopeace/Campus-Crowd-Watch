@@ -16,15 +16,27 @@ router.get("/api/occupancy", async (_, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 router.get("/api/occupancy/:building", async (req, res) => {
   try {
-    const user = await UserModel.findOne({
-      building: req.params.favorite_buildings.building_id,
-    }).populate("favorite_buildings");
+    const user = await OccupancyModel.find({
+      building_id: req.params.building,
+    }).populate("building_id");
     if (!user) {
       return res.status(404).send("user not found");
     }
     res.send(user);
+  } catch (err) {
+    console.error("Error occurred:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+router.post("/api/occupancy", async (req, res) => {
+  try {
+    const { building_id, occupancy, time, building } = req.body;
+    const newOccupancy = new OccupancyModel({ building_id, occupancy, time, building });
+    const savedOccupancy = await newOccupancy.save();
+    res.status(201).send(savedOccupancy);
   } catch (err) {
     console.error("Error occurred:", err);
     res.status(500).send("Internal Server Error");
