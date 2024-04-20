@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Login</title>
+    <!-- Include any necessary CSS files here -->
+  </head>
+  <body>
+    <h2>User Login</h2>
+    
+    <form id="loginForm">
+      <label for="username">Username:</label><br />
+      <input type="text" id="username" name="username" required /><br />
+      <label for="password">Password:</label><br />
+      <input type="password" id="password" name="password" required /><br />
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Include Axios for HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+ 
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // get login credentials
+          const loginData = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+          };
+
+          // Send POST request to backend to validate login
+          axios
+            .post("http://localhost:3000/api/login", loginData) 
+            .then(function (response) {
+              console.log("Login successful:", response.data);
+
+              sessionStorage.setItem("user", JSON.stringify(response.data));
+
+              window.location.href = "index.html"; 
+            })
+            .catch(function (error) {
+              console.error("Login failed:", error.response.data);
+              alert("Invalid username or password"); 
+            });
+        });
+    </script>
+  </body>
+</html>
