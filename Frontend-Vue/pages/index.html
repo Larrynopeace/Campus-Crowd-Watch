@@ -31,6 +31,16 @@
         <li class="navbar-item" id="login-link" style="display: none">
           <a href="login.html" class="navbar-link">Login</a>
         </li>
+        <li class="navbar-item" id="update-occupancy" style="display: none">
+          <a href="buildingUpdates.html" class="navbar-link"
+            >Update Occupancy</a
+          >
+        </li>
+        <li class="navbar-item" id="AddTimeOccupancy" style="display: none">
+          <a href="AddTimeOccupancy.html" class="navbar-link"
+            >Add Occupancy to database</a
+          >
+        </li>
         <li
           class="navbar-item"
           id="logout-link"
@@ -64,6 +74,12 @@
         ? "none"
         : "block";
       document.getElementById("logout-link").style.display = isLoggedIn
+        ? "block"
+        : "none";
+      document.getElementById("update-occupancy").style.display = isStaff
+        ? "block"
+        : "none";
+      document.getElementById("AddTimeOccupancy").style.display = isStaff
         ? "block"
         : "none";
     </script>
