@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="main.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Campus Crowd Watch</title>
   </head>
   <body>
@@ -14,20 +14,29 @@
     <nav class="navbar">
       <ul class="navbar-list">
         <!-- Always visible -->
-        <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
-        <li class="navbar-item"><a href="locations.html" class="navbar-link">Locations</a></li>
+        <li class="navbar-item">
+          <a href="index.html" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="locations.html" class="navbar-link">Locations</a>
+        </li>
 
         <!-- Conditional items -->
-        <li class="navbar-item" id="favorites-link" style="display: none;">
+        <li class="navbar-item" id="favorites-link" style="display: none">
           <a href="favourites.html" class="navbar-link">Favorites</a>
         </li>
-        <li class="navbar-item" id="create-account-link" style="display: none;">
+        <li class="navbar-item" id="create-account-link" style="display: none">
           <a href="CreateAccount.html" class="navbar-link">Create Account</a>
         </li>
-        <li class="navbar-item" id="login-link" style="display: none;">
+        <li class="navbar-item" id="login-link" style="display: none">
           <a href="login.html" class="navbar-link">Login</a>
         </li>
-        <li class="navbar-item" id="logout-link" style="display: none;" onclick="logout()">
+        <li
+          class="navbar-item"
+          id="logout-link"
+          style="display: none"
+          onclick="logout()"
+        >
           <a href="#" class="navbar-link">Logout</a>
         </li>
       </ul>
@@ -35,18 +44,38 @@
 
     <script>
       // Function to check if user is logged in
-      const isLoggedIn = sessionStorage.getItem('userLoggedIn') === 'true';
+      var isLoggedIn = sessionStorage.getItem("user") !== null;
+      console.log("User logged in:", isLoggedIn);
+      var user = sessionStorage.getItem("user");
+      if (user) {
+        user = JSON.parse(user);
+        var isStaff = user.is_staff;
+        console.log("User is staff:", isStaff);
+      }
 
       // Adjust navbar visibility based on login status
-      document.getElementById('favorites-link').style.display = isLoggedIn ? 'block' : 'none';
-      document.getElementById('create-account-link').style.display = isLoggedIn ? 'none' : 'block';
-      document.getElementById('login-link').style.display = isLoggedIn ? 'none' : 'block';
-      document.getElementById('logout-link').style.display = isLoggedIn ? 'block' : 'none';
+      document.getElementById("favorites-link").style.display = isLoggedIn
+        ? "block"
+        : "none";
+      document.getElementById("create-account-link").style.display = isLoggedIn
+        ? "none"
+        : "block";
+      document.getElementById("login-link").style.display = isLoggedIn
+        ? "none"
+        : "block";
+      document.getElementById("logout-link").style.display = isLoggedIn
+        ? "block"
+        : "none";
     </script>
 
     <div class="container">
       <div class="row">
-        <img class="hero" src="images-examples/campus-map.jpeg" alt="Campus Map" style="width: 100%">
+        <img
+          class="hero"
+          src="images-examples/campus-map.jpeg"
+          alt="Campus Map"
+          style="width: 100%"
+        />
       </div>
     </div>
   </body>
