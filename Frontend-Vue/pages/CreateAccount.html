@@ -3,19 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css" />
     <title>User Registration Form</title>
   </head>
   <body>
     <h2>Create New Account!</h2>
     <nav class="navbar">
       <ul class="navbar-list">
-        <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
-        <li class="navbar-item"><a href="locations.html" class="navbar-link">Locations</a></li>
-        <li class="navbar-item"><a href="login.html" class="navbar-link">Login</a></li>
+        <li class="navbar-item">
+          <a href="index.html" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="locations.html" class="navbar-link">Locations</a>
+        </li>
+        <li class="navbar-item">
+          <a href="login.html" class="navbar-link">Login</a>
+        </li>
       </ul>
     </nav>
-    
+
     <form id="userForm">
       <label for="username">Username:</label><br />
       <input type="text" id="username" name="username" required /><br />
@@ -30,10 +36,6 @@
       <button type="submit">Submit</button>
     </form>
 
-
-
-
-    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       document
@@ -62,13 +64,30 @@
           console.log("Form data:", formData);
 
           // Send POST request to backend
+          // get username
+          const username = document.getElementById("username").value;
+
           axios
-            .post("http://localhost:3000/api/users", formData)
-            .then(function (response) {
-              console.log(response);
+            .get(`http://localhost:3000/api/users/${username}`)
+            .then((response) => {
+              // user exists
+              alert("Username already exists");
             })
-            .catch(function (error) {
-              console.log(error);
+            .catch((error) => {
+              if (error.response && error.response.status === 404) {
+                // user doesn't exist, proceed with account creation
+                axios
+                  .post("http://localhost:3000/api/users", formData)
+                  .then(function (response) {
+                    console.log(response);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              } else {
+                console.error("Error occurred:", error);
+                // handle other errors
+              }
             });
         });
     </script>
