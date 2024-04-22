@@ -1,95 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
-    <title>User Registration Form</title>
-  </head>
-  <body>
-    <h2>Create New Account!</h2>
-    <nav class="navbar">
-      <ul class="navbar-list">
-        <li class="navbar-item">
-          <a href="index.html" class="navbar-link">Home</a>
-        </li>
-        <li class="navbar-item">
-          <a href="locations.html" class="navbar-link">Locations</a>
-        </li>
-        <li class="navbar-item">
-          <a href="login.html" class="navbar-link">Login</a>
-        </li>
-      </ul>
-    </nav>
 
-    <form id="userForm">
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" required /><br />
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" required /><br />
-      <label for="firstName">First Name:</label><br />
-      <input type="text" id="firstName" name="firstName" required /><br />
-      <label for="lastName">Last Name:</label><br />
-      <input type="text" id="lastName" name="lastName" required /><br />
-      <label for="password">Password:</label><br />
-      <input type="password" id="password" name="password" required /><br />
-      <button type="submit">Submit</button>
-    </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="main.css" />
+  <title>User Registration Form</title>
+  <link rel="stylesheet" href="logo.css">
+</head>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-      document
-        .getElementById("userForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent default form submission
-          var test = false;
-          if (
-            document
-              .getElementById("email")
-              .value.toLowerCase()
-              .endsWith("@otago.ac.nz")
-          ) {
-            test = true;
-          }
-          // Get form data
-          const formData = {
-            username: document.getElementById("username").value,
-            email: document.getElementById("email").value,
-            first_name: document.getElementById("firstName").value,
-            last_name: document.getElementById("lastName").value,
-            password: document.getElementById("password").value,
-            is_staff: test,
-            favorite_buildings: [],
-          };
-          console.log("Form data:", formData);
+<body>
+  <div class="logo-container">
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <nav class="navbar">
+    <ul class="navbar-list">
+      <li class="navbar-item">
+        <a href="index.html" class="navbar-link">Home</a>
+      </li>
+      <li class="navbar-item">
+        <a href="locations.html" class="navbar-link">Locations</a>
+      </li>
+      <li class="navbar-item">
+        <a href="login.html" class="navbar-link">Login</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="signup-modal">
+    <div class="signup-content">
+      <h3>Ready to Get Started?</h3>
+      <form id="userForm">
+        <label for="username">Username:</label><br />
+        <input type="text" id="username" name="username" required /><br />
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+        <label for="firstName">First Name:</label><br />
+        <input type="text" id="firstName" name="firstName" required /><br />
+        <label for="lastName">Last Name:</label><br />
+        <input type="text" id="lastName" name="lastName" required /><br />
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" required /><br />
+        <button type="submit">Submit</button>
+      </form>
+      <div class="acc-link">
+        <!-- Link to login -->
+        Already have an account? <a href="login.html">Login</a>
+      </div>
+    </div>
+  </div>
 
-          // Send POST request to backend
-          // get username
-          const username = document.getElementById("username").value;
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document
+      .getElementById("userForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+        var test = false;
+        if (
+          document
+            .getElementById("email")
+            .value.toLowerCase()
+            .endsWith("@otago.ac.nz")
+        ) {
+          test = true;
+        }
+        // Get form data
+        const formData = {
+          username: document.getElementById("username").value,
+          email: document.getElementById("email").value,
+          first_name: document.getElementById("firstName").value,
+          last_name: document.getElementById("lastName").value,
+          password: document.getElementById("password").value,
+          is_staff: test,
+          favorite_buildings: [],
+        };
+        console.log("Form data:", formData);
 
-          axios
-            .get(`http://localhost:3000/api/users/${username}`)
-            .then((response) => {
-              // user exists
-              alert("Username already exists");
-            })
-            .catch((error) => {
-              if (error.response && error.response.status === 404) {
-                // user doesn't exist, proceed with account creation
-                axios
-                  .post("http://localhost:3000/api/users", formData)
-                  .then(function (response) {
-                    console.log(response);
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
-              } else {
-                console.error("Error occurred:", error);
-                // handle other errors
-              }
-            });
-        });
-    </script>
-  </body>
+        // Send POST request to backend
+        // get username
+        const username = document.getElementById("username").value;
+
+        axios
+          .get(`http://localhost:3000/api/users/${username}`)
+          .then((response) => {
+            // user exists
+            alert("Username already exists");
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              // user doesn't exist, proceed with account creation
+              axios
+                .post("http://localhost:3000/api/users", formData)
+                .then(function (response) {
+                  console.log(response);
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            } else {
+              console.error("Error occurred:", error);
+              // handle other errors
+            }
+          });
+      });
+  </script>
+</body>
+
 </html>

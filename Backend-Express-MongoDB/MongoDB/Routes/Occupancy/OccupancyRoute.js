@@ -9,6 +9,7 @@ const router = Router();
 // Get all occupancy data
 router.get("/api/occupancy", async (_, res) => {
   try {
+    // .populate("building_id") is used to populate the referenced collection
     const occupancyData = await OccupancyModel.find({}).populate("building_id");
     res.send(occupancyData);
   } catch (err) {
@@ -17,6 +18,18 @@ router.get("/api/occupancy", async (_, res) => {
   }
 });
 
+// Get the occupancy data for a specific building by building name
+router.get("/api/occupancy/:buildingName", async (req, res) => {
+  try {
+    const occupancyData = await OccupancyModel.find({ "building": req.params.buildingName }).populate("building_id");
+    res.send(occupancyData);
+  } catch (err) {
+    console.error("Error occurred:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Get the occupancy data for a specific building by building id
 router.get("/api/occupancy/:building", async (req, res) => {
   try {
     const user = await OccupancyModel.find({
@@ -31,7 +44,6 @@ router.get("/api/occupancy/:building", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 router.post("/api/occupancy", async (req, res) => {
   try {
