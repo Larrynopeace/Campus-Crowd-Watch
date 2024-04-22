@@ -1,19 +1,26 @@
+/* Header */
 .header {
   text-align: center;
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #f8f9fa; /* Light gray background */
+  background-color: #89ab9d; /* Dark blue background */
   padding: 20px 0; /* Reduced padding */
+  color: #fff; /* White text color */
+}
+
+/* Headings */
+h1, h2, h3 {
+  text-align: center; /* Center headings */
+  color: #fff; /* White text color */
 }
 
 h1 {
   font-size: 48px; /* Slightly reduced font size */
-  margin-top: 15; /* Reset top margin */
+  margin-top: 40px; /* Reset top margin */
 }
 
 h2 {
-  padding-left: 10px;
   font-size: 24px;
 }
 
@@ -21,18 +28,23 @@ h3 {
   font-size: 20px;
 }
 
+/* Hero section */
 .hero {
   display: block;
   margin: 0 auto;
   width: 100%; /* Full container width */
 }
 
+/* Images */
 img {
   max-width: 100%; /* Ensure images don't exceed container width */
 }
 
+/* Cards */
 .card {
   margin: 10px;
+  padding: 20px; /* Add padding inside cards */
+  border-radius: 10px; /* Add rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s; /* Smooth transition */
 }
@@ -41,6 +53,7 @@ img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
+/* Container */
 .container {
   display: flex;
   justify-content: center; /* Center items horizontally */
@@ -49,11 +62,13 @@ img {
   padding: 0 50px;
 }
 
+/* Navbar */
 .navbar {
-  background-color: #343a40; /* Dark background color */
+  background-color: #678579; /* Dark green background */
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 999; /* Ensure it's above other content */
 }
 
 .navbar-list {
@@ -68,46 +83,62 @@ img {
 }
 
 .navbar-link {
-  color: white; /* White text for links */
+  color: #fff; /* White text for links */
   text-decoration: none; /* No underline */
   padding: 10px; /* Padding around links */
   font-size: 20px;
 }
 
 .navbar-link:hover {
-  color: #adb5bd; /* Lighten text color on hover */
+  color: #ecf0f1; /* Light gray text color on hover */
 }
 
+/* Form */
 form {
   margin-top: 20px; /* Add space above the form */
+  max-width: 400px; /* Limit form width for better readability */
+  background-color: #f9f9f9; /* Light gray background */
+  padding: 20px; /* Add padding */
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
+/* Label */
 label {
   display: block; /* Make labels appear on their own line */
-  margin-bottom: 5px; /* Add space below each label */
+  margin-bottom: 1px; /* Add space below each label */
   font-weight: bold; /* Make labels bold */
+  color: #555; /* Dark gray label color */
 }
 
+/* Input */
 input {
-  width: 100%; /* Make inputs take full width of their container */
-  padding: 10px; /* Increased padding */
-  margin-bottom: 15px; /* Add space below each input */
-  border: 1px solid #ced4da; /* Light gray border */
-  border-radius: 5px; /* Add rounded corners */
+  width: 100%; /* Make inputs take full width */
+  padding: 12px; /* Adjust padding */
+  margin-bottom: 10px; /* Add space below each input */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Add rounded corners */
   box-sizing: border-box; /* Include padding and border in element's total width */
+  transition: border-color 0.3s; /* Smooth transition for border color */
 }
 
+input:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #3498db; /* Blue border color on focus */
+}
+
+/* Submit Button */
 input[type="submit"] {
-  background-color: #007bff; /* Blue background color for submit button */
-  color: white; /* White text color for submit button */
+  background-color: #3498db; /* Blue background color for submit button */
+  color: #fff; /* White text color for submit button */
   border: none; /* Remove border */
-  border-radius: 5px; /* Add rounded corners */
+  border-radius: 8px; /* Add rounded corners */
   cursor: pointer; /* Show pointer cursor on hover */
-  padding: 12px 20px; /* Increased padding */
+  padding: 12px 24px; /* Adjust padding */
   font-size: 16px; /* Set font size */
   transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
 input[type="submit"]:hover {
-  background-color: #0056b3; /* Darker blue background color on hover */
+  background-color: #2980b9; /* Darker blue background color on hover */
 }
