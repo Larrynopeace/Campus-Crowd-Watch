@@ -19,9 +19,11 @@ router.get("/api/occupancy", async (_, res) => {
 });
 
 // Get the occupancy data for a specific building by building name
-router.get("/api/occupancy/:buildingName", async (req, res) => {
+router.get("/api/occupancy/name/:buildingName", async (req, res) => {
   try {
-    const occupancyData = await OccupancyModel.find({ "building": req.params.buildingName }).populate("building_id");
+    const occupancyData = await OccupancyModel.find({
+      building: req.params.buildingName,
+    }).populate("building_id");
     res.send(occupancyData);
   } catch (err) {
     console.error("Error occurred:", err);
