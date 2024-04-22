@@ -12,20 +12,22 @@
 /* Headings */
 h1, h2, h3 {
   text-align: center; /* Center headings */
-  color: #fff; /* White text color */
 }
 
 h1 {
   font-size: 48px; /* Slightly reduced font size */
   margin-top: 40px; /* Reset top margin */
+  color: #fff;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 20px;
+  color: #fff;
 }
 
 h3 {
   font-size: 20px;
+  color: #65917f;
 }
 
 /* Hero section */
@@ -96,7 +98,7 @@ img {
 /* Form */
 form {
   margin-top: 20px; /* Add space above the form */
-  max-width: 400px; /* Limit form width for better readability */
+  max-width: 800px; /* Limit form width for better readability */
   background-color: #f9f9f9; /* Light gray background */
   padding: 20px; /* Add padding */
   border-radius: 10px; /* Add rounded corners */
@@ -142,3 +144,18 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #2980b9; /* Darker blue background color on hover */
 }
+.acc-link {
+  text-align: center; /* Center the text */
+  margin-top: 20px; /* Add some space above */
+}
+
+.acc-link a {
+  color: #1959a3; /* Blue color for the link */
+  text-decoration: none; /* Remove default underline */
+  font-weight: bold; /* Make the link bold */
+}
+
+.acc-link a:hover {
+  text-decoration: underline; /* Underline the link on hover */
+}
+
