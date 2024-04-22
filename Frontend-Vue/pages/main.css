@@ -159,3 +159,23 @@ input[type="submit"]:hover {
   text-decoration: underline; /* Underline the link on hover */
 }
 
+.building-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: calc(33.33% - 20px); /* Adjust the width as needed */
+  box-sizing: border-box;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Adjust card styles as needed */
+.card-title {
+  margin-top: 0;
+}
+

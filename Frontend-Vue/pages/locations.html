@@ -57,21 +57,58 @@
       document.getElementById('logout-link').style.display = isLoggedIn ? 'block' : 'none';
     </script>
 
-    <div class="container">
+
+<div class="building-cards" id="building-cards"></div>
+
 
       <!-- buildings.ejs -->
 
-  <div class="building-cards">
-    <% buildings.forEach(building => { %>
-      <div class="card">
-        <h2><%= building.Building_Name %></h2>
-        <img src="<%= building.image_url %>">
-      </div>
-    <% }) %>
-  </div>
 
+    <script>
+      // Function to create a card for each building
+      function createBuildingCard(building) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+        <h5 class="card-title">${building.Building_Name}</h5>
+        <p class="card-text">Address: ${building.Address}</p>
+        <p class="card-text">Max Occupancy: ${building.Max_Occupancy}</p>
+        <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
+        <!-- Add more details as needed -->
+      `;
 
-    </div>
+        // Add click event listener to the card
+        card.addEventListener("click", function () {
+          // Make GET request when card is clicked
+          fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data); // You can handle the response data here
+            })
+            .catch((error) => console.error("Error fetching building:", error));
+        });
+
+        return card;
+      }
+
+      // Function to render building cards
+      function renderBuildingCards(buildings) {
+        const buildingCardsContainer =
+          document.getElementById("building-cards");
+        buildings.forEach((building) => {
+          const card = createBuildingCard(building);
+          buildingCardsContainer.appendChild(card);
+        });
+      }
+
+      // Fetch buildings data from the API endpoint
+      fetch("http://localhost:3000/api/buildings")
+        .then((response) => response.json())
+        .then((buildings) => {
+          renderBuildingCards(buildings);
+        })
+        .catch((error) => console.error("Error fetching buildings:", error));
+    </script>
 
   <!-- <div class="container">
 
@@ -123,6 +160,6 @@
       </div>
     </div>-->
 
-    <script src="Campus-Crowd-Watch/Frontend-Vue/src/locations.js"></script>
+ 
   </body>
 </html>
