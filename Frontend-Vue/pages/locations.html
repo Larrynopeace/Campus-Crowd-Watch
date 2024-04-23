@@ -79,11 +79,12 @@
         card.className = "card";
         card.innerHTML = `
         <!-- add image-->
+        <img src="${building.image_url}" class="card-img" alt="Building Image">
         <h3 class="card-title">${building.Building_Name}</h3>
         <p class="card-text">${building.Address}</p>
         <p class="card-text">Maximum Capacity: ${building.Max_Occupancy}</p>
         <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
-        <img src="${building.image_url}" class="card-img" alt="Building Image">
+        
         <br>
         <br>
       `;
@@ -142,6 +143,29 @@ toggleSwitch.addEventListener("change", function() {
           buildingCardsContainer.appendChild(card);
         });
       }
+
+      // Function to render building cards based on session storage
+function renderBuildingCardsBasedOnSession(buildings) {
+  const buildingCardsContainer = document.getElementById("building-cards");
+  buildings.forEach((building) => {
+    // Check if the building ID is present in session storage
+    const isFavorite = sessionStorage.getItem(building._id) === 'true';
+    // Render the building card only if it's a favorite
+    if (isFavorite) {
+      const card = createBuildingCard(building);
+      buildingCardsContainer.appendChild(card);
+    }
+  });
+}
+
+// Fetch buildings data from the API endpoint
+fetch("http://localhost:3000/api/buildings")
+  .then((response) => response.json())
+  .then((buildings) => {
+    renderBuildingCardsBasedOnSession(buildings);
+  })
+  .catch((error) => console.error("Error fetching buildings:", error));
+
 
       
 
