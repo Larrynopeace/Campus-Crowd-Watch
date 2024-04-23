@@ -25,6 +25,9 @@ db(
     app.use(express.json());
     app.use(buildingRouter);
     app.use(occupancyRouter);
+
+    //To serve these local images, you can use the express.static middleware in your Express.js server: http://localhost:3000/images/xxxx.jpeg
+    app.use('/images', express.static('images'));
     
     console.log("Connection succeeded");
   },
