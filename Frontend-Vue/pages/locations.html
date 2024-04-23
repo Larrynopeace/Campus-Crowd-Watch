@@ -105,15 +105,19 @@
       document.body.appendChild(card);
 
     // Add event listener for toggle switch
-    toggleSwitch.addEventListener("change", function() {
-      if (this.checked) {
-        // Do something when the toggle switch is ON
-        console.log("Toggle switch is ON");
-      } else {
-        // Do something when the toggle switch is OFF
-        console.log("Toggle switch is OFF");
-      }
-    });
+toggleSwitch.addEventListener("change", function() {
+  if (this.checked) {
+    // Retrieve the building ObjectId
+    const buildingId = building._id; // Assuming _id contains the ObjectId
+    // Store the building ObjectId in the session storage
+    sessionStorage.setItem("favoriteBuilding", buildingId);
+    console.log("Building added to favorites:", buildingId);
+  } else {
+    // Remove the building ObjectId from the session storage if unchecked
+    sessionStorage.removeItem("favoriteBuilding");
+    console.log("Building removed from favorites");
+  }
+});
 
         // Add click event listener to the card
         card.addEventListener("click", function () {
@@ -138,6 +142,8 @@
           buildingCardsContainer.appendChild(card);
         });
       }
+
+      
 
       // Fetch buildings data from the API endpoint
       fetch("http://localhost:3000/api/buildings")
