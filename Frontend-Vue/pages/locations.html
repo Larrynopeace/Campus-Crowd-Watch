@@ -1,85 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="main.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vite App</title>
-  <link rel="stylesheet" href="logo.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap"
-    rel="stylesheet">
-</head>
-
-<body>
-  <div class="logo-container">
-    <div class="loader">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+    <link rel="stylesheet" href="logo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="logo-container">
+      <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-  </div>
-  <!--<div id="app"></div>-->
-  <!-- <script type="module" src="/src/main.js"></script>-->
-  <div class="row header">
-    <h1 class="title"> Locations </h1>
-    <h2>Take a look at the avaliabilty of your favorite spots around campus!</h2>
-  </div>
+   <!--<div id="app"></div>-->
+   <!-- <script type="module" src="/src/main.js"></script>-->
+    <div class="row header">
+        <h1 class="title"> Locations </h1>
+        <h2>Take a look at the avaliabilty of your favorite spots around campus!</h2>
+    </div>
 
-  <nav class="navbar">
-    <ul class="navbar-list">
-      <!-- Always visible -->
-      <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
-      <li class="navbar-item"><a href="locations.html" class="navbar-link">Locations</a></li>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <!-- Always visible -->
+        <li class="navbar-item"><a href="index.html" class="navbar-link">Home</a></li>
+        <li class="navbar-item"><a href="locations.html" class="navbar-link">Locations</a></li>
 
-      <!-- Conditional items -->
-      <li class="navbar-item" id="favorites-link" style="display: none;">
-        <a href="favourites.html" class="navbar-link">Favorites</a>
-      </li>
-      <li class="navbar-item" id="create-account-link" style="display: none;">
-        <a href="CreateAccount.html" class="navbar-link">Create Account</a>
-      </li>
-      <li class="navbar-item" id="login-link" style="display: none;">
-        <a href="login.html" class="navbar-link">Login</a>
-      </li>
-      <li class="navbar-item" id="logout-link" style="display: none;" onclick="logout()">
-        <a href="#" class="navbar-link">Logout</a>
-      </li>
-    </ul>
-  </nav>
+        <!-- Conditional items -->
+        <li class="navbar-item" id="favorites-link" style="display: none;">
+          <a href="favourites.html" class="navbar-link">Favorites</a>
+        </li>
+        <li class="navbar-item" id="create-account-link" style="display: none;">
+          <a href="CreateAccount.html" class="navbar-link">Create Account</a>
+        </li>
+        <li class="navbar-item" id="login-link" style="display: none;">
+          <a href="login.html" class="navbar-link">Login</a>
+        </li>
+        <li class="navbar-item" id="logout-link" style="display: none;" onclick="logout()">
+          <a href="#" class="navbar-link">Logout</a>
+        </li>
+      </ul>
+    </nav>
 
-  <script>
-    // Function to check if user is logged in
-    const isLoggedIn = sessionStorage.getItem('userLoggedIn') === 'true';
+    <script>
+      // Function to check if user is logged in
+      const isLoggedIn = sessionStorage.getItem('userLoggedIn') === 'true';
 
-    // Adjust navbar visibility based on login status
-    document.getElementById('favorites-link').style.display = isLoggedIn ? 'block' : 'none';
-    document.getElementById('create-account-link').style.display = isLoggedIn ? 'none' : 'block';
-    document.getElementById('login-link').style.display = isLoggedIn ? 'none' : 'block';
-    document.getElementById('logout-link').style.display = isLoggedIn ? 'block' : 'none';
-  </script>
-
+      // Adjust navbar visibility based on login status
+      document.getElementById('favorites-link').style.display = isLoggedIn ? 'block' : 'none';
+      document.getElementById('create-account-link').style.display = isLoggedIn ? 'none' : 'block';
+      document.getElementById('login-link').style.display = isLoggedIn ? 'none' : 'block';
+      document.getElementById('logout-link').style.display = isLoggedIn ? 'block' : 'none';
+    </script>
 
 
-  <div class="building-cards" id="building-cards"></div>
+
+<div class="building-cards" id="building-cards"></div>
 
 
-  <!-- buildings.ejs -->
+      <!-- buildings.ejs -->
 
 
-  <script>
-    // Function to create a card for each building
-    function createBuildingCard(building) {
-      const container = document.createElement("div");
-      container.className = "container";
+    <script>
+      // Function to create a card for each building
+      function createBuildingCard(building) {
+        const container = document.createElement("div");
+        container.className = "container";
 
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
         <!-- add image-->
         <h3 class="card-title">${building.Building_Name}</h3>
         <p class="card-text">${building.Address}</p>
@@ -88,41 +85,57 @@
         <!-- Add more details as needed -->
       `;
 
-      container.appendChild(card);
+      // Create and append the toggle switch
+      const toggleSwitch = document.createElement("input");
+      toggleSwitch.type = "checkbox";
+      toggleSwitch.className = "toggle-switch"; // Add a class for styling
+      card.appendChild(toggleSwitch);
 
-      // Add click event listener to the card
-      card.addEventListener("click", function () {
-        // Make GET request when card is clicked
-        fetch(`http://localhost:3000/api/occupancy/${building._id}`)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data); // You can handle the response data here
-          })
-          .catch((error) => console.error("Error fetching building:", error));
-      });
+      document.body.appendChild(card);
 
-      return card;
-    }
+    // Add event listener for toggle switch
+    toggleSwitch.addEventListener("change", function() {
+      if (this.checked) {
+        // Do something when the toggle switch is ON
+        console.log("Toggle switch is ON");
+      } else {
+        // Do something when the toggle switch is OFF
+        console.log("Toggle switch is OFF");
+      }
+    });
 
-    // Function to render building cards
-    function renderBuildingCards(buildings) {
-      const buildingCardsContainer =
-        document.getElementById("building-cards");
-      buildings.forEach((building) => {
-        const card = createBuildingCard(building);
-        buildingCardsContainer.appendChild(card);
-      });
-    }
+        // Add click event listener to the card
+        card.addEventListener("click", function () {
+          // Make GET request when card is clicked
+          fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data); // You can handle the response data here
+            })
+            .catch((error) => console.error("Error fetching building:", error));
+        });
 
-    // Fetch buildings data from the API endpoint
-    fetch("http://localhost:3000/api/buildings")
-      .then((response) => response.json())
-      .then((buildings) => {
-        renderBuildingCards(buildings);
-      })
-      .catch((error) => console.error("Error fetching buildings:", error));
-  </script>
+        return card;
+      }
 
-</body>
+      // Function to render building cards
+      function renderBuildingCards(buildings) {
+        const buildingCardsContainer =
+          document.getElementById("building-cards");
+        buildings.forEach((building) => {
+          const card = createBuildingCard(building);
+          buildingCardsContainer.appendChild(card);
+        });
+      }
 
+      // Fetch buildings data from the API endpoint
+      fetch("http://localhost:3000/api/buildings")
+        .then((response) => response.json())
+        .then((buildings) => {
+          renderBuildingCards(buildings);
+        })
+        .catch((error) => console.error("Error fetching buildings:", error));
+    </script>
+
+  </body>
 </html>
