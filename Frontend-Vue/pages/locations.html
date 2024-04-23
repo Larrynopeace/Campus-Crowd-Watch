@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
     <link rel="stylesheet" href="logo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="logo-container">
@@ -58,6 +61,7 @@
     </script>
 
 
+
 <div class="building-cards" id="building-cards"></div>
 
 
@@ -67,15 +71,21 @@
     <script>
       // Function to create a card for each building
       function createBuildingCard(building) {
+        const container = document.createElement("div");
+        container.className = "container";
+
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-        <h5 class="card-title">${building.Building_Name}</h5>
-        <p class="card-text">Address: ${building.Address}</p>
-        <p class="card-text">Max Occupancy: ${building.Max_Occupancy}</p>
+        <!-- add image-->
+        <h3 class="card-title">${building.Building_Name}</h3>
+        <p class="card-text">${building.Address}</p>
+        <p class="card-text">Maximum Capacity: ${building.Max_Occupancy}</p>
         <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
         <!-- Add more details as needed -->
       `;
+
+      container.appendChild(card);
 
         // Add click event listener to the card
         card.addEventListener("click", function () {
@@ -110,56 +120,5 @@
         .catch((error) => console.error("Error fetching buildings:", error));
     </script>
 
-  <!-- <div class="container">
-
-      <div class="row">
-      <div class="card">
-        <img src="../../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Business School</b></h2><br>
-      
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Central Library</b></h2><br>
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Unipol Recreation Center</b></h2><br>
-        </div>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="card">
-        <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Business School</b></h2><br>
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Central Library</b></h2><br>
-        </div>
-      </div>
-    
-      <div class="card">
-        <img src="../images-examples/card1-img.jpeg" alt="Avatar" style="width:100%">
-        <div class="text-area">
-          <h2><b>Unipol Recreation Center</b></h2><br>
-        </div>
-      </div>
-      </div>
-    </div>-->
-
- 
   </body>
 </html>

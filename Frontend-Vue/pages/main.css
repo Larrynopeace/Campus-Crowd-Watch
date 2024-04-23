@@ -49,19 +49,12 @@ img {
   border-radius: 10px; /* Add rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s; /* Smooth transition */
+  width: calc(50% - 10px); /* Set the width of each card to half of the container width minus some margin */
+  margin-bottom: 20px; /* Adjust as needed */
 }
 
 .card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
-}
-
-/* Container */
-.container {
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  margin-top: 50px;
-  padding: 0 50px;
 }
 
 /* Navbar */
@@ -160,9 +153,12 @@ input[type="submit"]:hover {
 }
 
 .building-cards {
+  /*display: flex;
+  flex-wrap: wrap;
+  gap: 20px;*/
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  justify-content: space-between;
 }
 
 .card {
@@ -177,5 +173,17 @@ input[type="submit"]:hover {
 /* Adjust card styles as needed */
 .card-title {
   margin-top: 0;
+  color: #678579;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+
 }
+
+.card-text {
+  text-align: center;
+}
+
+
+
 
