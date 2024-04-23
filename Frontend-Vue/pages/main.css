@@ -1,22 +1,31 @@
+
 /* Header */
 .header {
   text-align: center;
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #89ab9d; /* Dark blue background */
-  padding: 20px 0; /* Reduced padding */
-  color: #fff; /* White text color */
+  background-color: #89ab9d;
+  /* Dark blue background */
+  padding: 20px 0;
+  /* Reduced padding */
+  color: #fff;
+  /* White text color */
 }
 
 /* Headings */
-h1, h2, h3 {
-  text-align: center; /* Center headings */
+h1,
+h2,
+h3 {
+  text-align: center;
+  /* Center headings */
 }
 
 h1 {
-  font-size: 48px; /* Slightly reduced font size */
-  margin-top: 40px; /* Reset top margin */
+  font-size: 48px;
+  /* Slightly reduced font size */
+  margin-top: 40px;
+  /* Reset top margin */
   color: #fff;
 }
 
@@ -34,122 +43,152 @@ h3 {
 .hero {
   display: block;
   margin: 0 auto;
-  width: 100%; /* Full container width */
+  width: 100%;
+  /* Full container width */
 }
 
 /* Images */
 img {
-  max-width: 100%; /* Ensure images don't exceed container width */
-}
-
-/* Cards */
-.card {
-  margin: 10px;
-  padding: 20px; /* Add padding inside cards */
-  border-radius: 10px; /* Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s; /* Smooth transition */
-  width: calc(50% - 10px); /* Set the width of each card to half of the container width minus some margin */
-  margin-bottom: 20px; /* Adjust as needed */
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  max-width: 100%;
+  /* Ensure images don't exceed container width */
 }
 
 /* Navbar */
 .navbar {
-  background-color: #678579; /* Dark green background */
+  background-color: #678579;
+  /* Dark green background */
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 999; /* Ensure it's above other content */
+  z-index: 999;
+  /* Ensure it's above other content */
 }
 
 .navbar-list {
   display: flex;
   justify-content: center;
   padding: 0;
-  list-style: none; /* No bullet points for list */
+  list-style: none;
+  /* No bullet points for list */
 }
 
 .navbar-item {
-  margin-right: 20px; /* Space between navbar items */
+  margin-right: 20px;
+  /* Space between navbar items */
 }
 
 .navbar-link {
-  color: #fff; /* White text for links */
-  text-decoration: none; /* No underline */
-  padding: 10px; /* Padding around links */
+  color: #fff;
+  /* White text for links */
+  text-decoration: none;
+  /* No underline */
+  padding: 10px;
+  /* Padding around links */
   font-size: 20px;
 }
 
 .navbar-link:hover {
-  color: #ecf0f1; /* Light gray text color on hover */
+  color: #ecf0f1;
+  /* Light gray text color on hover */
 }
 
 /* Form */
 form {
-  margin-top: 20px; /* Add space above the form */
-  max-width: 800px; /* Limit form width for better readability */
-  background-color: #f9f9f9; /* Light gray background */
-  padding: 20px; /* Add padding */
-  border-radius: 10px; /* Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin-top: 20px;
+  /* Add space above the form */
+  max-width: 800px;
+  /* Limit form width for better readability */
+  background-color: #f9f9f9;
+  /* Light gray background */
+  padding: 20px;
+  /* Add padding */
+  border-radius: 10px;
+  /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Soft shadow */
 }
 
 /* Label */
 label {
-  display: block; /* Make labels appear on their own line */
-  margin-bottom: 1px; /* Add space below each label */
-  font-weight: bold; /* Make labels bold */
-  color: #555; /* Dark gray label color */
+  display: block;
+  /* Make labels appear on their own line */
+  margin-bottom: 1px;
+  /* Add space below each label */
+  font-weight: bold;
+  /* Make labels bold */
+  color: #555;
+  /* Dark gray label color */
 }
 
 /* Input */
 input {
-  width: 100%; /* Make inputs take full width */
-  padding: 12px; /* Adjust padding */
-  margin-bottom: 10px; /* Add space below each input */
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 8px; /* Add rounded corners */
-  box-sizing: border-box; /* Include padding and border in element's total width */
-  transition: border-color 0.3s; /* Smooth transition for border color */
+  width: 100%;
+  /* Make inputs take full width */
+  padding: 12px;
+  /* Adjust padding */
+  margin-bottom: 10px;
+  /* Add space below each input */
+  border: 1px solid #ccc;
+  /* Light gray border */
+  border-radius: 8px;
+  /* Add rounded corners */
+  box-sizing: border-box;
+  /* Include padding and border in element's total width */
+  transition: border-color 0.3s;
+  /* Smooth transition for border color */
 }
 
 input:focus {
-  outline: none; /* Remove default focus outline */
-  border-color: #3498db; /* Blue border color on focus */
+  outline: none;
+  /* Remove default focus outline */
+  border-color: #3498db;
+  /* Blue border color on focus */
 }
 
 /* Submit Button */
 input[type="submit"] {
-  background-color: #3498db; /* Blue background color for submit button */
-  color: #fff; /* White text color for submit button */
-  border: none; /* Remove border */
-  border-radius: 8px; /* Add rounded corners */
-  cursor: pointer; /* Show pointer cursor on hover */
-  padding: 12px 24px; /* Adjust padding */
-  font-size: 16px; /* Set font size */
-  transition: background-color 0.3s; /* Smooth transition for background color */
+  background-color: #3498db;
+  /* Blue background color for submit button */
+  color: #fff;
+  /* White text color for submit button */
+  border: none;
+  /* Remove border */
+  border-radius: 8px;
+  /* Add rounded corners */
+  cursor: pointer;
+  /* Show pointer cursor on hover */
+  padding: 12px 24px;
+  /* Adjust padding */
+  font-size: 16px;
+  /* Set font size */
+  transition: background-color 0.3s;
+  /* Smooth transition for background color */
 }
 
 input[type="submit"]:hover {
-  background-color: #2980b9; /* Darker blue background color on hover */
+  background-color: #2980b9;
+  /* Darker blue background color on hover */
 }
+
 .acc-link {
-  text-align: center; /* Center the text */
-  margin-top: 20px; /* Add some space above */
+  text-align: center;
+  /* Center the text */
+  margin-top: 20px;
+  /* Add some space above */
 }
 
 .acc-link a {
-  color: #1959a3; /* Blue color for the link */
-  text-decoration: none; /* Remove default underline */
-  font-weight: bold; /* Make the link bold */
+  color: #1959a3;
+  /* Blue color for the link */
+  text-decoration: none;
+  /* Remove default underline */
+  font-weight: bold;
+  /* Make the link bold */
 }
 
 .acc-link a:hover {
-  text-decoration: underline; /* Underline the link on hover */
+  text-decoration: underline;
+  /* Underline the link on hover */
 }
 
 .building-cards {
@@ -159,18 +198,26 @@ input[type="submit"]:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 350px;
 }
 
 .card {
+  margin: 10px;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  width: calc(33.33% - 20px); /* Adjust the width as needed */
+  width: calc(33.33% - 20px);
+  /* Adjust the width as needed */
   box-sizing: border-box;
-  cursor: pointer; /* Change cursor to pointer on hover */
+  cursor: pointer;
+  /* Change cursor to pointer on hover */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s;
+
 }
 
-/* Adjust card styles as needed */
 .card-title {
   margin-top: 0;
   color: #678579;
@@ -179,11 +226,10 @@ input[type="submit"]:hover {
   font-size: 25px;
 
 }
-
 .card-text {
   text-align: center;
 }
-
-
-
-
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Deeper shadow on hover */
+}
