@@ -61,6 +61,7 @@
     </script>
 
 
+<div class="favourite-cards" id="favourite-cards"></div>
 
 <div class="building-cards" id="building-cards"></div>
 
@@ -82,14 +83,23 @@
         <p class="card-text">${building.Address}</p>
         <p class="card-text">Maximum Capacity: ${building.Max_Occupancy}</p>
         <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
-        <!-- Add more details as needed -->
+        <br>
+        <br>
       `;
 
       // Create and append the toggle switch
       const toggleSwitch = document.createElement("input");
       toggleSwitch.type = "checkbox";
-      toggleSwitch.className = "toggle-switch"; // Add a class for styling
-      card.appendChild(toggleSwitch);
+      toggleSwitch.className = "card-button"; 
+
+        // Create a label element for the switch
+        const labelParagraph = document.createElement("p");
+        labelParagraph.className = "card-button";
+        labelParagraph.textContent = "Add to Favorites";
+
+        card.appendChild(labelParagraph);
+        labelParagraph.appendChild(toggleSwitch);
+      
 
       document.body.appendChild(card);
 
