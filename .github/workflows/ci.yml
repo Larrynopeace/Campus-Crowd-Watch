@@ -19,5 +19,5 @@ jobs:
         node-version: '20'  # Specify the Node.js version
         
     - name: working directory and set up
-      working-directory: .\Backend-Express-MongoDB\
+      working-directory: ./Backend-Express-MongoDB/
       run: node index.js
