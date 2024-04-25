@@ -36,8 +36,8 @@ import ScienceLibrary from './component/barChartScienceLibrary.js';
 import LawLibrary from './component/barChartLawLibrary.js';
 import RobertsonLibrary from './component/barChartRobertsonLibrary.js';
 import BusinessSchool from './component/barChartBusinessSchool.js';
-
-import pieChart from './component/pieChart.js'; // Summary of the current occupancy of all buildings
+// Summary of the current occupancy of all buildings
+import pieChart from './component/pieChart.js'; 
 // 2. Register the component
 app.component('bar-chart', BarChart);
 app.component('central-library', CentralLibrary);

@@ -16,10 +16,37 @@ export default {
                     testData.value = response.data;
 
                     // Map testData to a new array for the pie chart data
-                    const pieChartData = testData.value.map(item => ({
+                    /* const pieChartData = testData.value.map(item => ({
                         name: item.Building_Name,
                         value: item.Current_Occupancy
-                    }));
+                    })); */
+
+                    // Map testData to a new array for the pie chart data
+                    const pieChartData = testData.value.map(item => {
+                        if (item.Current_Occupancy > 200) {
+                            console.log(`Building ${item.Building_Name} has occupancy over 200: ${item.Current_Occupancy}`);
+
+                            // Send email to user when the occupancy is over 200
+                            axios.post('http://localhost:3000/send-email', {
+                                email: '2501990530@qq.com',
+                                buildingName: item.Building_Name,
+                                currentOccupancy: item.Current_Occupancy
+                            })
+                                .then(response => {
+                                    console.log(response.data);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+                        }
+
+                        return {
+                            name: item.Building_Name,
+                            value: item.Current_Occupancy
+                        };
+                    });
+
+                    console.log('@@@Pie Chart Data:', testData);
 
                     // Initialize the echarts
                     var chartDom = document.getElementById('main');

@@ -16,6 +16,7 @@ app.use(cors());
 import db from "./MongoDB/Mongodb-setting/mongodb-setting.js";
 import buildingRouter from "./Router/BuildingRouter.js";
 import occupancyRouter from "./Router/OccupancyRouter.js";
+import sendEmail from "./MongoDB/Routes/send-emails.js";
 
 // Connect to mongoDB
 db(
@@ -25,6 +26,7 @@ db(
     app.use(express.json());
     app.use(buildingRouter);
     app.use(occupancyRouter);
+    app.use(sendEmail);
 
     //To serve these local images, you can use the express.static middleware in your Express.js server: http://localhost:3000/images/xxxx.jpeg
     app.use('/images', express.static('images'));
