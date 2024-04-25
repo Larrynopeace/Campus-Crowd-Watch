@@ -18,26 +18,14 @@
 
 <body>
     <div id="app">
-        <!-- Testing reactive data -->
-        {{ message }}
-        <button @click="addLetter">Add Letter</button>
-        <br><br>
-
-        <el-card style="max-width: 480px" @click="openTable()">
-            <template #header>Yummy hamburger</template>
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                style="width: 100%" />
-        </el-card>
-
-        <!-- Pop up graph within a drawer after clicking a card (Don't use selectedCardTitle.value) -->
-        <el-drawer v-model="table" title="I have a nested graph inside!" direction="rtl" size="80%">
+        
             <!-- Echarts graph component -->
-            <bar-chart></bar-chart>
-        </el-drawer>
+            <robertson-library></robertson-library>
+
     </div>
 
     <!-- Add your script tags here to import controller at the end of the body -->
-    <script type="module" src="../js/taskExample.js"></script>
+    <script type="module" src="../js/testOfLocations.js"></script>
 </body>
 
 </html>

@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Building Cards</title>
-    <style>
-      .building-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
 
-      .card {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        width: calc(33.33% - 20px); /* Adjust the width as needed */
-        box-sizing: border-box;
-        cursor: pointer; /* Change cursor to pointer on hover */
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Cards</title>
+  <style>
+    .building-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-      /* Adjust card styles as needed */
-      .card-title {
-        margin-top: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="building-cards" id="building-cards"></div>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      width: calc(33.33% - 20px);
+      /* Adjust the width as needed */
+      box-sizing: border-box;
+      cursor: pointer;
+      /* Change cursor to pointer on hover */
+    }
 
-    <script>
-      // Function to create a card for each building
-      function createBuildingCard(building) {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
+    /* Adjust card styles as needed */
+    .card-title {
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="building-cards" id="building-cards"></div>
+
+  <script>
+    // Function to create a card for each building
+    function createBuildingCard(building) {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
         <h5 class="card-title">${building.Building_Name}</h5>
         <p class="card-text">Address: ${building.Address}</p>
         <p class="card-text">Max Occupancy: ${building.Max_Occupancy}</p>
         <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
       `; // Add click event listener to the card
-        card.addEventListener("click", function () {
-          // Make GET request when card is clicked
-          fetch(`http://localhost:3000/api/occupancy/${building._id}`)
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(building._id);
-              console.log(data); // You can handle the response data here
-            })
-            .catch((error) => console.error("Error fetching building:", error));
-        });
+      card.addEventListener("click", function () {
+        // Make GET request when card is clicked
+        fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(building._id);
+            console.log(data); // You can handle the response data here
+          })
+          .catch((error) => console.error("Error fetching building:", error));
+      });
 
-        return card;
-      }
+      return card;
+    }
 
-      // Function to render building cards
-      function renderBuildingCards(buildings) {
-        const buildingCardsContainer =
-          document.getElementById("building-cards");
-        buildings.forEach((building) => {
-          const card = createBuildingCard(building);
-          buildingCardsContainer.appendChild(card);
-        });
-      }
+    // Function to render building cards
+    function renderBuildingCards(buildings) {
+      const buildingCardsContainer = document.getElementById("building-cards");
+      buildings.forEach((building) => { const card = createBuildingCard(building); buildingCardsContainer.appendChild(card); });
+    }
 
-      // Fetch buildings data from the API endpoint
-      fetch("http://localhost:3000/api/buildings")
-        .then((response) => response.json())
-        .then((buildings) => {
-          renderBuildingCards(buildings);
-        })
-        .catch((error) => console.error("Error fetching buildings:", error));
-    </script>
-  </body>
+    // Fetch buildings data from the API endpoint
+    fetch("http://localhost:3000/api/buildings")
+      .then((response) => response.json())
+      .then((buildings) => {
+        renderBuildingCards(buildings);
+      })
+      .catch((error) => console.error("Error fetching buildings:", error));
+  </script>
+</body>
+
 </html>

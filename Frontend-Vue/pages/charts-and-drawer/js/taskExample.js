@@ -1,4 +1,4 @@
-// This is the line chart controller
+// This is the taskExample controller
 const { createApp, ref, onMounted } = Vue
 
 const app = createApp({
@@ -36,7 +36,7 @@ const app = createApp({
     }
 })
 
-import BarChart from './barChartExample.js';   
+import BarChart from './component/barChartUnipol.js';   
 // Register the component
 app.component('bar-chart', BarChart);
 
