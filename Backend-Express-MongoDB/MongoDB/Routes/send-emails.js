@@ -17,15 +17,6 @@ router.post('/send-email', (req, res) => {
         }
     });
 
-    /* let transporter = nodemailer.createTransport({
-        host: 'smtp.qq.com',
-        port: 465,
-        secure: true, // use SSL
-        auth: {
-            user: '2501990530@qq.com', // replace with your QQ email
-            pass: 'dyotmjbwgaqyeabf' // replace with your QQ email smtp授权码
-        }
-    }); */
     let mailOptions = {
         from: 'larryandsea@gmail.com',
         to: req.body.email,
