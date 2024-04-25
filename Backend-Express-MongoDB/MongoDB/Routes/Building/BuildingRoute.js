@@ -14,19 +14,7 @@ router.get("/api/buildings", async (req, res) => {
     }
 });
 
-// Get a single building by ID
-// router.get("/api/buildings/:id", async (req, res) => {
-//     try {
-//         const building = await BuildingModel.findById(req.params.id);
-//         if (!building) {
-//             return res.status(404).send("Building not found");
-//         }
-//         res.send(building);
-//     } catch (err) {
-//         console.error("Error occurred:", err);
-//         res.status(500).send("Internal Server Error");
-//     }
-// });
+
 
 // Get a single building by ID
 router.get("/api/buildings/:id", async (req, res) => {

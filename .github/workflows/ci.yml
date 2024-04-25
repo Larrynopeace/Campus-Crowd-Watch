@@ -18,6 +18,8 @@ jobs:
       with:
         node-version: '20'  # Specify the Node.js version
         
-    - name: working directory and set up
-      working-directory: ./Backend-Express-MongoDB/
-      run: node index.js
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run tests
+        run: npm test
