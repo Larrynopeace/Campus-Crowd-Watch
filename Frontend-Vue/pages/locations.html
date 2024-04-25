@@ -161,8 +161,19 @@
 
           // Save the updated user object back to sessionStorage
           sessionStorage.setItem("user", JSON.stringify(user));
-          const test = JSON.parse(sessionStorage.getItem("user"));
-          console.log("test:", test.favorite_buildings);
+          fetch(`http://localhost:3000/api/users/${user.username}/favorite_buildings`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ favorite_buildings: user.favorite_buildings }),
+  })
+    .then((response) => response.json())
+    .then((updatedUser) => {
+      console.log("User's favorite buildings updated:", updatedUser.favorite_buildings);
+    })
+    .catch((error) => console.error("Error updating user's favorite buildings:", error));
+          
         });
 
         // Add click event listener to the card
