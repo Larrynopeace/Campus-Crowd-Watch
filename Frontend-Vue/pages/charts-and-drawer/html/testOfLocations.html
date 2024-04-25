@@ -139,7 +139,7 @@
       const labelParagraph = document.createElement("p");
       labelParagraph.className = "card-button";
       labelParagraph.textContent = "Add to Favorites";
-
+      
       card.appendChild(labelParagraph);
       labelParagraph.appendChild(toggleSwitch);
 
@@ -150,9 +150,9 @@
       toggleSwitch.addEventListener("change", function () {
         if (this.checked) {
           // Retrieve the building ObjectId
-          const buildingId = building._id; // Assuming _id contains the ObjectId
+          const buildingId = building; // Assuming _id contains the ObjectId
           // Store the building ObjectId in the session storage
-          sessionStorage.setItem("favoriteBuilding", buildingId);
+          sessionStorage.setItem("user", buildingId);
           console.log("Building added to favorites:", buildingId);
         } else {
           // Remove the building ObjectId from the session storage if unchecked
