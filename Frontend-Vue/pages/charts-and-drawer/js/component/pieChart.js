@@ -28,7 +28,7 @@ export default {
 
                             // Send email to user when the occupancy is over 200
                             axios.post('http://localhost:3000/send-email', {
-                                email: '2501990530@qq.com',
+                                email: '2501990530@qq.com', // Replace with your testing receiver email
                                 buildingName: item.Building_Name,
                                 currentOccupancy: item.Current_Occupancy
                             })

@@ -21,7 +21,7 @@ router.post('/send-email', (req, res) => {
         from: 'larryandsea@gmail.com',
         to: req.body.email,
         subject: 'Capacity Notification',
-        text: 'Hi there,\n\n' + req.body.buildingName + ' has occupancy over 200. ' + 'The current occupancy is: ' + req.body.currentOccupancy
+        text: 'Hi there,\n\n' + req.body.buildingName + ' has occupancy over 200.' + 'The current occupancy is: ' + req.body.currentOccupancy
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

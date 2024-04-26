@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="main.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <link rel="stylesheet" href="logo.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+
+  <!-- *Larry -->
+  <!-- Add your script tags here to import libraries in the head -->
+  <!-- Import style -->
+  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <!-- Import Vue 3 -->
+  <script src="//unpkg.com/vue@3"></script>
+  <!-- Import component library -->
+  <script src="//unpkg.com/element-plus"></script>
+  <!-- Import ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <!-- Import axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="logo.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="app">
     <div class="logo-container">
       <div class="loader">
         <span></span>
@@ -23,10 +38,12 @@
         <span></span>
       </div>
     </div>
-    <!--<div id="app"></div>-->
-    <!-- <script type="module" src="/src/main.js"></script>-->
+
     <div class="row header">
       <h1 class="title">Locations</h1>
+      <!-- *Larry -->
+      <!-- The button to open the Drawer which contains a pie chart -->
+      <el-button type="success" @click="openTable()">!!!!!!Check out the summary!!!!!!</el-button>
       <h2>
         Take a look at the avaliabilty of your favorite spots around campus!
       </h2>
@@ -52,35 +69,11 @@
         <li class="navbar-item" id="login-link" style="display: none">
           <a href="login.html" class="navbar-link">Login</a>
         </li>
-        <li
-          class="navbar-item"
-          id="logout-link"
-          style="display: none"
-          onclick="logout()"
-        >
+        <li class="navbar-item" id="logout-link" style="display: none" onclick="logout()">
           <a href="#" class="navbar-link">Logout</a>
         </li>
       </ul>
     </nav>
-
-    <script>
-      // Function to check if user is logged in
-      const isLoggedIn = sessionStorage.getItem("userLoggedIn") === "true";
-
-      // Adjust navbar visibility based on login status
-      document.getElementById("favorites-link").style.display = isLoggedIn
-        ? "block"
-        : "none";
-      document.getElementById("create-account-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("login-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("logout-link").style.display = isLoggedIn
-        ? "block"
-        : "none";
-    </script>
 
     <div class="row">
       <div class="subheadings"></div>
@@ -98,127 +91,189 @@
       <div class="building-cards" id="building-cards"></div>
     </div>
 
-    <script>
-      // Function to create a card for each building
-      function createBuildingCard(building) {
-        const container = document.createElement("div");
-        container.className = "container";
+    <!-- *Larry -->
+    <!-- Pop up graph within a drawer after clicking a card (Don't use selectedCardTitle.value) -->
+    <el-drawer v-model="table" title="I have a nested graph inside!" direction="rtl" size="80%">
+      <!-- Echarts graph component -->
+      <pie-chart></pie-chart>
+    </el-drawer>
+  </div>
 
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
+  <script>
+    // *Larry
+    // Define clickedBuildingName at the top of your script
+    let clickedBuildingName = '';
+
+    // Function to check if user is logged in
+    const isLoggedIn = sessionStorage.getItem("userLoggedIn") === "true";
+
+    // Adjust navbar visibility based on login status
+    document.getElementById("favorites-link").style.display = isLoggedIn
+      ? "block"
+      : "none";
+    document.getElementById("create-account-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("login-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("logout-link").style.display = isLoggedIn
+      ? "block"
+      : "none";
+
+    // Function to create a card for each building
+    function createBuildingCard(building) {
+      const container = document.createElement("div");
+      container.className = "container";
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
         <!-- add image-->
         <img src="${building.image_url}" class="card-img" alt="Building Image">
         <h3 class="card-title">${building.Building_Name}</h3>
         <p class="card-text">${building.Address}</p>
         <p class="card-text">Maximum Capacity: ${building.Max_Occupancy}</p>
         <p class="card-text">Current Occupancy: ${building.Current_Occupancy}</p>
-        
         <br>
         <br>
       `;
 
-        // Create and append the toggle switch
-        const toggleSwitch = document.createElement("input");
-        toggleSwitch.type = "checkbox";
-        toggleSwitch.className = "card-button";
+      // Create and append the toggle switch
+      const toggleSwitch = document.createElement("input");
+      toggleSwitch.type = "checkbox";
+      toggleSwitch.className = "card-button";
 
-        // Check if the building is in the user's favorite buildings array
-        const user = JSON.parse(sessionStorage.getItem("user"));
+      // Check if the building is in the user's favorite buildings array
+      const user = JSON.parse(sessionStorage.getItem("user"));
 
-        var foundBuilding = user.favorite_buildings.some(
-          (b) => b._id === building._id
-        );
-        console.log("Found building:", foundBuilding);
-        if (foundBuilding) {
-          toggleSwitch.checked = true;
-          console.log("Building is a favorite:", building);
-        }
-        console.log("User favorite buildings:", user.favorite_buildings);
-        // Create a label element for the switch
-        const labelParagraph = document.createElement("p");
-        labelParagraph.className = "card-button";
-        labelParagraph.textContent = "Add to Favorites";
-
-        card.appendChild(labelParagraph);
-        labelParagraph.appendChild(toggleSwitch);
-
-        document.body.appendChild(card);
-
-        // Add event listener for toggle switch
-        toggleSwitch.addEventListener("change", function () {
-          const user = JSON.parse(sessionStorage.getItem("user"));
-          if (this.checked) {
-            // Retrieve the building ObjectId
-            user.favorite_buildings.push(building);
-            sessionStorage.setItem("user", JSON.stringify(user));
-          } else {
-            // Remove the building ObjectId from the session storage if unchecked
-            user.favorite_buildings = user.favorite_buildings.filter(
-              (b) => b._id !== building._id
-            );
-          }
-
-          // Save the updated user object back to sessionStorage
-          sessionStorage.setItem("user", JSON.stringify(user));
-          const test = JSON.parse(sessionStorage.getItem("user"));
-          console.log("test:", test.favorite_buildings);
-        });
-
-        // Add click event listener to the card
-        card.addEventListener("click", function () {
-          // Make GET request when card is clicked
-          fetch(`http://localhost:3000/api/occupancy/${building._id}`)
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data); // You can handle the response data here
-            })
-            .catch((error) => console.error("Error fetching building:", error));
-        });
-
-        return card;
+      var foundBuilding = user.favorite_buildings.some(
+        (b) => b._id === building._id
+      );
+      console.log("Found building:", foundBuilding);
+      if (foundBuilding) {
+        toggleSwitch.checked = true;
+        console.log("Building is a favorite:", building);
       }
+      console.log("User favorite buildings:", user.favorite_buildings);
+      // Create a label element for the switch
+      const labelParagraph = document.createElement("p");
+      labelParagraph.className = "card-button";
+      labelParagraph.textContent = "Add to Favorites";
 
-      // Function to render building cards
-      function renderBuildingCards(buildings) {
-        const buildingCardsContainer =
-          document.getElementById("building-cards");
-        buildings.forEach((building) => {
+      card.appendChild(labelParagraph);
+      labelParagraph.appendChild(toggleSwitch);
+
+      document.body.appendChild(card);
+
+      // Add event listener for toggle switch
+      toggleSwitch.addEventListener("change", function (/* event */) {
+
+        // *Larry
+        // Add this line to prevent the click event from bubbling up to the card
+        //event.stopPropagation(); 
+
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        if (this.checked) {
+          // Retrieve the building ObjectId
+          user.favorite_buildings.push(building);
+          sessionStorage.setItem("user", JSON.stringify(user));
+        } else {
+          // Remove the building ObjectId from the session storage if unchecked
+          user.favorite_buildings = user.favorite_buildings.filter(
+            (b) => b._id !== building._id
+          );
+        }
+
+        // Save the updated user object back to sessionStorage
+        sessionStorage.setItem("user", JSON.stringify(user));
+        const test = JSON.parse(sessionStorage.getItem("user"));
+        console.log("test:", test.favorite_buildings);
+
+        // *Larry
+        // Refresh the page
+        location.reload();
+      });
+
+      // Add click event listener to the card
+      card.addEventListener("click", function () {
+        // Make GET request when card is clicked
+        fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data); // You can handle the response data here
+
+            // *Larry
+            // Store the clicked building name
+            console.log("Building clicked:", building.Building_Name);
+            clickedBuildingName = building.Building_Name;
+            // Check the clicked building name and redirect to the appropriate page
+            if (clickedBuildingName === 'Unipol Recreation Service') {
+              window.location.href = '../pages/charts-and-drawer/html/barChartUnipol.html';
+            } else if (clickedBuildingName === 'Central Library') {
+              window.location.href = '../pages/charts-and-drawer/html/centralLibraryChart.html';
+            } else if (clickedBuildingName === 'Science Library') {
+              window.location.href = '../pages/charts-and-drawer/html/scienceLibraryChart.html';
+            } else if (clickedBuildingName === 'Law Library') {
+              window.location.href = '../pages/charts-and-drawer/html/lawLibraryChart.html';
+            } else if (clickedBuildingName === 'Robertson Library') {
+              window.location.href = '../pages/charts-and-drawer/html/robertsonLibraryChart.html';
+            } else if (clickedBuildingName === 'Business School') {
+              window.location.href = '../pages/charts-and-drawer/html/businessSchoolChart.html';
+            } else {
+              console.log("Building not found");
+            }
+          })
+          .catch((error) => console.error("Error fetching building:", error));
+      });
+
+      return card;
+    }
+
+    // Function to render building cards
+    function renderBuildingCards(buildings) {
+      const buildingCardsContainer =
+        document.getElementById("building-cards");
+      buildings.forEach((building) => {
+        const card = createBuildingCard(building);
+        buildingCardsContainer.appendChild(card);
+      });
+    }
+
+    // Function to render building cards based on session storage
+    function renderBuildingCardsBasedOnSession(buildings) {
+      const buildingCardsContainer =
+        document.getElementById("building-cards");
+      buildings.forEach((building) => {
+        // Check if the building ID is present in session storage
+        const isFavorite = sessionStorage.getItem(building._id) === "true";
+        // Render the building card only if it's a favorite
+        if (isFavorite) {
           const card = createBuildingCard(building);
           buildingCardsContainer.appendChild(card);
-        });
-      }
+        }
+      });
+    }
 
-      // Function to render building cards based on session storage
-      function renderBuildingCardsBasedOnSession(buildings) {
-        const buildingCardsContainer =
-          document.getElementById("building-cards");
-        buildings.forEach((building) => {
-          // Check if the building ID is present in session storage
-          const isFavorite = sessionStorage.getItem(building._id) === "true";
-          // Render the building card only if it's a favorite
-          if (isFavorite) {
-            const card = createBuildingCard(building);
-            buildingCardsContainer.appendChild(card);
-          }
-        });
-      }
+    // Fetch buildings data from the API endpoint
+    fetch("http://localhost:3000/api/buildings")
+      .then((response) => response.json())
+      .then((buildings) => {
+        renderBuildingCardsBasedOnSession(buildings);
+      })
+      .catch((error) => console.error("Error fetching buildings:", error));
 
-      // Fetch buildings data from the API endpoint
-      fetch("http://localhost:3000/api/buildings")
-        .then((response) => response.json())
-        .then((buildings) => {
-          renderBuildingCardsBasedOnSession(buildings);
-        })
-        .catch((error) => console.error("Error fetching buildings:", error));
+    // Fetch buildings data from the API endpoint
+    fetch("http://localhost:3000/api/buildings")
+      .then((response) => response.json())
+      .then((buildings) => {
+        renderBuildingCards(buildings);
+      })
+      .catch((error) => console.error("Error fetching buildings:", error));
+  </script>
 
-      // Fetch buildings data from the API endpoint
-      fetch("http://localhost:3000/api/buildings")
-        .then((response) => response.json())
-        .then((buildings) => {
-          renderBuildingCards(buildings);
-        })
-        .catch((error) => console.error("Error fetching buildings:", error));
-    </script>
-  </body>
+  <!-- *Larry -->
+  <script type="module" src="../pages/charts-and-drawer/js/testOfLocations.js"></script>
+</body>
+
 </html>
