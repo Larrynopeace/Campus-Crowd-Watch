@@ -1,6 +1,6 @@
 // This is the route handler for sending emails.
 
-import { config } from 'dotenv'; // It is from .env file and used for the 'pass' 
+import { config } from 'dotenv'; // It is from .env file and used for the 'pass' below 
 import { Router } from 'express';
 import nodemailer from 'nodemailer';
 
@@ -29,8 +29,8 @@ router.post('/send-email', (req, res) => {
             console.log(error);
             res.status(500).send(error);
         } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).send('Email sent: ' + info.response);
+            console.log('@@@Email sent: ' + info.response);
+            res.status(200).send('@@@Email sent: ' + info.response);
         }
     });
 });
