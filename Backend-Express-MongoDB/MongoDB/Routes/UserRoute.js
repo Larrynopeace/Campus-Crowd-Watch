@@ -68,5 +68,18 @@ router.put("/api/users/:username/favorite_buildings", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
+router.get("/api/users/:username/favorite_buildings", async (req, res) => {
+  try {
+    const user = await UserModel.findOne({
+      username: req.params.username,
+    }).populate("favorite_buildings");
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    res.send(user.favorite_buildings);
+  } catch (err) {
+    console.error("Error occurred:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 export default router;
