@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="main.css" />
     <title>Update Building Occupancy</title>
   </head>
-  
+
   <body>
     <form id="updateForm">
       <label for="time">Time</label><br />
@@ -27,6 +27,16 @@
     </form>
 
     <script>
+      // Get the user object from sessionStorage
+      var user = sessionStorage.getItem("user");
+
+      user = JSON.parse(user);
+      var isStaff = user.is_staff;
+      if (isStaff == false) {
+        alert("Please log in to view this page");
+        window.location.href = "index.html";
+      }
+
       // Fetch all buildings and populate the dropdown
       window.onload = function () {
         document.getElementById("currentTime").value = new Date()
