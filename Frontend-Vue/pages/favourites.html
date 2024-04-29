@@ -32,12 +32,7 @@
   <body>
     <div id="app">
       <div class="logo-container">
-        <div class="loader">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <div class="loader"></div>
       </div>
 
       <div class="row header">
@@ -127,6 +122,21 @@
     </div>
 
     <script>
+      // Get the user object from sessionStorage
+      var user = sessionStorage.getItem("user");
+
+      // Check if the user object exists
+      if (!user) {
+        // If the user object does not exist, redirect to index.html
+        alert("Please log in to view this page");
+        window.location.href = "index.html";
+      } else {
+        user = JSON.parse(user);
+        var isStaff = user.is_staff;
+        console.log("User is staff:", isStaff);
+      }
+
+      console.log("User:", user);
       // *Larry
       // Define clickedBuildingName at the top of your script
       let clickedBuildingName = "";
