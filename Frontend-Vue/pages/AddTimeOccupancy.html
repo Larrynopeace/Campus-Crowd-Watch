@@ -23,7 +23,7 @@
         id="Current_Occupancy"
         name="Current_Occupancy"
       /><br />
-      <input type="submit" value="Submit" />
+      <input type="submit" id="submit-button" value="Submit" />
     </form>
 
     <script>
@@ -112,6 +112,50 @@
               console.error("Error:", error);
             });
         });
+      // Function to send the POST request
+      function sendPostRequest() {
+        const building_id = document.getElementById("building_id").value;
+        console.log(building_id);
+        const building = document.getElementById("building_id").textContent;
+        console.log(building);
+
+        const occupancy = document.getElementById("Current_Occupancy").value;
+        console.log(occupancy);
+        const time = document.getElementById("currentTime").value;
+        console.log(time);
+
+        // Check if any of the required fields are empty
+        if (!building_id || !building || !occupancy || !time) {
+          console.error("Error: All fields are required.");
+          return;
+        }
+
+        fetch("http://localhost:3000/api/occupancy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            building,
+            building_id,
+            occupancy,
+            time,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      setTimeout(sendPostRequest, 15 * 1000);
+      // Set interval to call sendPostRequest every 15 minutes (15 * 60 * 1000 milliseconds)
+      setInterval(function () {
+        location.reload();
+      }, 15 * 60 * 1000);
     </script>
   </body>
 </html>
