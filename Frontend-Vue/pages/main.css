@@ -245,4 +245,64 @@ input[type="submit"]:hover {
   border-radius: 10px;
   
 }
+/* update occupancy Form */
+.update-form {
+  margin-top: 20px;
+  /* Add space above the form */
+  max-width: 1000px;
+  /* Limit form width for better readability */
+  background-color: #f9f9f9;
+  /* Light gray background */
+  padding: 20px;
+  /* Add padding */
+  border-radius: 10px;
+  /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Label */
+.update-form label {
+  display: block; /* Make labels appear on their own line */
+  margin-bottom: 1px; /* Add space below each label */
+  font-weight: bold; /* Make labels bold */
+  color: #555; /* Dark gray label color */
+}
+
+/* Input */
+.update-form input {
+  width: 100%;
+  /* Make inputs take full width */
+  padding: 12px;
+  /* Adjust padding */
+  margin-bottom: 10px;
+  /* Add space below each input */
+  border: 1px solid #ccc;
+  /* Light gray border */
+  border-radius: 8px;
+  /* Add rounded corners */
+  box-sizing: border-box;
+  /* Include padding and border in element's total width */
+  transition: border-color 0.3s;
+  /* Smooth transition for border color */
+}
+
+.update-form input:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #3498db; /* Blue border color on focus */
+}
+
+/* Submit Button */
+.update-form input[type="submit"] {
+  background-color: #3498db; /* Blue background color for submit button */
+  color: #fff; /* White text color for submit button */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Add rounded corners */
+  cursor: pointer; /* Show pointer cursor on hover */
+  padding: 12px 24px; /* Adjust padding */
+  font-size: 16px; /* Set font size */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.update-form input[type="submit"]:hover {
+  background-color: #2980b9; /* Darker blue background color on hover */
+}
