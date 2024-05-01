@@ -181,7 +181,7 @@
       function createBuildingCard(building) {
         const container = document.createElement("div");
         container.className = "container";
-
+        const toggleSwitch = document.createElement("input");
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
@@ -200,7 +200,7 @@
           console.log("User object does not exist in sessionStorage");
         } else {
           console.log("User object exists in sessionStorage");
-          const toggleSwitch = document.createElement("input");
+
           toggleSwitch.type = "checkbox";
           toggleSwitch.className = "card-button";
           // Check if the building is in the user's favorite buildings array
@@ -223,11 +223,8 @@
           card.appendChild(labelParagraph);
           labelParagraph.appendChild(toggleSwitch);
           // Add event listener for toggle switch
-          toggleSwitch.addEventListener("change", function (/* event */) {
-            // *Larry
-            // Add this line to prevent the click event from bubbling up to the card
-            //event.stopPropagation();
-
+          toggleSwitch.addEventListener("change", function (event) {
+            event.stopPropagation();
             const user = JSON.parse(sessionStorage.getItem("user"));
             if (this.checked) {
               // Retrieve the building ObjectId
@@ -273,7 +270,10 @@
         document.body.appendChild(card);
 
         // Add click event listener to the card
-        card.addEventListener("click", function () {
+        card.addEventListener("click", function (event) {
+          if (toggleSwitch.contains(event.target)) {
+            return;
+          }
           // Make GET request when card is clicked
           fetch(`http://localhost:3000/api/occupancy/${building._id}`)
             .then((response) => response.json())
