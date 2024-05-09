@@ -1,95 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <title>User Login</title>
+    <link rel="stylesheet" href="logo.css" />
+    <!-- Include any necessary CSS files here -->
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="main.css" />
-  <title>User Login</title>
-  <link rel="stylesheet" href="logo.css">
-  <!-- Include any necessary CSS files here -->
-</head>
-
-<body>
-  <div class="logo-container">
-    <div class="loader">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <nav class="navbar">
-    <ul class="navbar-list">
-      <li class="navbar-item">
-        <a href="index.html" class="navbar-link">Home</a>
-      </li>
-      <li class="navbar-item">
-        <a href="locations.html" class="navbar-link">Locations</a>
-      </li>
-      <li class="navbar-item">
-        <a href="createAccount.html" class="navbar-link">Create Account</a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="login-modal">
-    <div class="login-content">
-      <h3>Login for Full Access to Exciting Features!</h3>
-
-      <form id="loginForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-
-        <button type="submit" class="login-button">Login</button>
-      </form>
-      <div class="acc-link">
-        <!-- Link to create account -->
-        Don't have an account? <a href="createAccount.html">Sign up</a>
+  <body>
+    <div class="logo-container">
+      <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
-  </div>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="navbar-item">
+          <a href="index.html" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="locations.html" class="navbar-link">Locations</a>
+        </li>
+        <li class="navbar-item">
+          <a href="createAccount.html" class="navbar-link">Create Account</a>
+        </li>
+      </ul>
+    </nav>
 
-  <!-- Include Axios for HTTP requests -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    document
-      .getElementById("loginForm")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
+    <div class="login-modal">
+      <div class="login-content">
+        <h3>Login for Full Access to Exciting Features!</h3>
 
-        // get login credentials
-        const loginData = {
-          username: document.getElementById("username").value,
-          password: document.getElementById("password").value,
-        };
+        <form id="loginForm">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
 
-        // send GET request to server
-        axios
-          .get(`http://localhost:3000/api/users/${loginData.username}`)
-          .then((response) => {
-            // check if passwords match
-            if (response.data.password === loginData.password) {
-              console.log("Login successful");
-              sessionStorage.setItem("user", JSON.stringify(response.data));
-              alert("Login successful");
-              // Redirect to home page
-              window.location.href = "index.html";
-              // proceed with login
-            } else {
-              console.log("Invalid password");
-              alert("Invalid password");
-            }
-          })
-          .catch((error) => {
-            console.error("Error occurred:", error);
-            // handle error
-          });
-      });
-  </script>
-</body>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
 
+          <button type="submit" class="login-button">Login</button>
+        </form>
+        <div class="acc-link">
+          <!-- Link to create account -->
+          Don't have an account? <a href="createAccount.html">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Axios for HTTP requests -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // get login credentials
+          const loginData = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value,
+          };
+
+          // send GET request to server
+          axios
+            .get(`http://localhost:3000/api/users/${loginData.username}`)
+            .then((response) => {
+              // check if passwords match
+              if (response.data.password === loginData.password) {
+                console.log("Login successful");
+                sessionStorage.setItem("user", JSON.stringify(response.data));
+                alert("Login successful");
+                // Redirect to home page
+                window.location.href = "index.html";
+                // proceed with login
+              } else {
+                console.log("Invalid password");
+                alert("Invalid password or username");
+              }
+            })
+            .catch((error) => {
+              console.error("Error occurred:", error);
+              // handle error
+            });
+        });
+    </script>
+  </body>
 </html>

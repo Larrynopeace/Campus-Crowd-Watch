@@ -96,6 +96,7 @@
                 axios
                   .post("http://localhost:3000/api/users", formData)
                   .then(function (response) {
+                    alert("Account created successfully");
                     console.log(response);
                   })
                   .catch(function (error) {

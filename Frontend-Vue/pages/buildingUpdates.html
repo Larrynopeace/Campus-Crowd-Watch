@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="logo.css" />
   </head>
   <body>
-    
     <div class="logo-container">
       <div class="loader">
         <span></span>
@@ -98,7 +97,7 @@
         : "none";
     </script>
 
-    <form id="updateForm" class = ".update-form ">
+    <form id="updateForm" class=".update-form">
       <label for="building_id">Building ID:</label><br />
       <select
         id="building_id"
@@ -184,7 +183,7 @@
             body: JSON.stringify({ Current_Occupancy }),
           })
             .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then((data) => alert("Occupancy updated"))
             .catch((error) => {
               console.error("Error:", error);
             });
