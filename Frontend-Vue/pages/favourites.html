@@ -351,8 +351,15 @@
           .then((buildings) => {
             // Handle the data here
             console.log("Favorite buildings:", buildings);
-            renderBuildingCardsBasedOnSession(buildings);
-            renderBuildingCards(buildings);
+            if (buildings.length === 0) {
+              alert(
+                "No favorite buildings found. Please add some favorites to view this page"
+              );
+              window.location.href = "locations.html";
+            } else {
+              renderBuildingCardsBasedOnSession(buildings);
+              renderBuildingCards(buildings);
+            }
           })
           .catch((error) => {
             // Handle the error here
