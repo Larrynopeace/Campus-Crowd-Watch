@@ -52,50 +52,94 @@
         </h2>
       </div>
 
-      <nav class="navbar">
-        <ul class="navbar-list">
-          <!-- Always visible -->
-          <li class="navbar-item">
-            <a href="index.html" class="navbar-link">Home</a>
-          </li>
-          <li class="navbar-item">
-            <a href="locations.html" class="navbar-link">Locations</a>
-          </li>
+      
+Sure, here's the layout for the provided HTML code:
 
-          <!-- Conditional items -->
-          <li class="navbar-item" id="favorites-link" style="display: none">
-            <a href="favourites.html" class="navbar-link">Favorites</a>
-          </li>
-          <li
-            class="navbar-item"
-            id="create-account-link"
-            style="display: none"
-          >
-            <a href="CreateAccount.html" class="navbar-link">Create Account</a>
-          </li>
-          <li class="navbar-item" id="login-link" style="display: none">
-            <a href="login.html" class="navbar-link">Login</a>
-          </li>
-          <li class="navbar-item" id="update-occupancy" style="display: none">
-            <a href="buildingUpdates.html" class="navbar-link"
-              >Update Occupancy</a
-            >
-          </li>
-          <li class="navbar-item" id="AddTimeOccupancy" style="display: none">
-            <a href="AddTimeOccupancy.html" class="navbar-link"
-              >Add Occupancy to database</a
-            >
-          </li>
-          <li
-            class="navbar-item"
-            id="logout-link"
-            style="display: none"
-            onclick="logout()"
-          >
-            <a href="#" class="navbar-link">Logout</a>
-          </li>
-        </ul>
-      </nav>
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+
+  <!-- *Larry -->
+  <!-- Add your script tags here to import libraries in the head -->
+  <!-- Import style -->
+  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <!-- Import Vue 3 -->
+  <script src="//unpkg.com/vue@3"></script>
+  <!-- Import component library -->
+  <script src="//unpkg.com/element-plus"></script>
+  <!-- Import ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <!-- Import axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <link rel="stylesheet" href="logo.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="logo-container">
+      <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="row header">
+      <h1 class="title">Locations</h1>
+      <!-- *Larry -->
+      <!-- The button to open the Drawer which contains a pie chart -->
+      <el-button type="success" @click="openTable()">!!!!!!Check out the summary!!!!!!</el-button>
+      <h2>
+        Take a look at the availability of your favorite spots around campus!
+      </h2>
+    </div>
+
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <!-- Always visible -->
+        <li class="navbar-item">
+          <a href="index.html" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="locations.html" class="navbar-link">Locations</a>
+        </li>
+
+        <!-- Conditional items -->
+        <li class="navbar-item" id="favorites-link" style="display: none">
+          <a href="favourites.html" class="navbar-link">Favorites</a>
+        </li>
+        <li class="navbar-item" id="create-account-link" style="display: none">
+          <a href="CreateAccount.html" class="navbar-link">Create Account</a>
+        </li>
+        <li class="navbar-item" id="login-link" style="display: none">
+          <a href="login.html" class="navbar-link">Login</a>
+        </li>
+        <li class="navbar-item" id="update-occupancy" style="display: none">
+          <a href="buildingUpdates.html" class="navbar-link">Update Occupancy</a>
+        </li>
+        <li class="navbar-item" id="AddTimeOccupancy" style="display: none">
+          <a href="AddTimeOccupancy.html" class="navbar-link">Add Occupancy to database</a>
+        </li>
+        <li class="navbar-item" id="logout-link" style="display: none" onclick="logout()">
+          <a href="#" class="navbar-link">Logout</a>
+        </li>
+      </ul>
+    </nav>
+
 
       <div class="row">
         <div class="subheadings"></div>
@@ -277,22 +321,22 @@
               // Check the clicked building name and redirect to the appropriate page
               if (clickedBuildingName === "Unipol Recreation Service") {
                 window.location.href =
-                  "/charts-and-drawer/html/barChartUnipol.html";
+                  "../pages/charts-and-drawer/html/barChartUnipol.html";
               } else if (clickedBuildingName === "Central Library") {
                 window.location.href =
-                  "/charts-and-drawer/html/centralLibraryChart.html";
+                  "../pages/charts-and-drawer/html/centralLibraryChart.html";
               } else if (clickedBuildingName === "Science Library") {
                 window.location.href =
-                  "/charts-and-drawer/html/scienceLibraryChart.html";
+                  "../pages/charts-and-drawer/html/scienceLibraryChart.html";
               } else if (clickedBuildingName === "Law Library") {
                 window.location.href =
-                  "/charts-and-drawer/html/lawLibraryChart.html";
+                  "../pages/charts-and-drawer/html/lawLibraryChart.html";
               } else if (clickedBuildingName === "Robertson Library") {
                 window.location.href =
-                  "/charts-and-drawer/html/robertsonLibraryChart.html";
+                  "../pages/charts-and-drawer/html/robertsonLibraryChart.html";
               } else if (clickedBuildingName === "Business School") {
                 window.location.href =
-                  "/charts-and-drawer/html/businessSchoolChart.html";
+                  "../pages/charts-and-drawer/html/businessSchoolChart.html";
               } else {
                 console.log("Building not found");
               }
@@ -348,7 +392,7 @@
     <!-- *Larry -->
     <script
       type="module"
-      src="/charts-and-drawer/js/testOfLocations.js"
+      src="../pages/charts-and-drawer/js/testOfLocations.js"
     ></script>
   </body>
 </html>
