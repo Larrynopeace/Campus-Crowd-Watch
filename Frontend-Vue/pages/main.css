@@ -277,8 +277,7 @@ img {
 .fav-building-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 1200px;
+  margin-top: 300px;
 }
 
 .fav-card {
@@ -317,13 +316,13 @@ img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .fav-card {
     width: calc(50% - 20px);
   }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 480px) {
   .fav-card {
     width: 100%;
   }
