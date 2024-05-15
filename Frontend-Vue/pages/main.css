@@ -324,6 +324,26 @@ img {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.modal-titles {
+  color: #678579;
+  font-size: 25px;
+}
+
+.new-button {
+  background-color: #678579;
+  color: white;
+}
+
+.links {
+  color: #678579;
+  text-decoration: none;
+
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
   .fav-card {
     width: calc(50% - 20px);
