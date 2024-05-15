@@ -96,38 +96,39 @@
     let favoriteBuildingsOrder = [];
 
     function logout() {
-        // Remove the user object from sessionStorage
-        sessionStorage.removeItem("user");
-        location.reload();
-      }
-      // Function to check if user is logged in
-      var isLoggedIn = sessionStorage.getItem("user") !== null;
-      console.log("User logged in:", isLoggedIn);
-      var user = sessionStorage.getItem("user");
-      if (user) {
-        user = JSON.parse(user);
-        var isStaff = user.is_staff;
-        console.log("User is staff:", isStaff);
-      }
-      console.log("User:", user);
+      // Remove the user object from sessionStorage
+      sessionStorage.removeItem("user");
+      // Redirect to home page
+      window.location.href = 'index.html';
+    }
+    // Function to check if user is logged in
+    var isLoggedIn = sessionStorage.getItem("user") !== null;
+    console.log("User logged in:", isLoggedIn);
+    var user = sessionStorage.getItem("user");
+    if (user) {
+      user = JSON.parse(user);
+      var isStaff = user.is_staff;
+      console.log("User is staff:", isStaff);
+    }
+    console.log("User:", user);
 
-      // Adjust navbar visibility based on login status
+    // Adjust navbar visibility based on login status
 
-      document.getElementById("create-account-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("login-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("logout-link").style.display = isLoggedIn
-        ? "block"
-        : "none";
-      document.getElementById("update-occupancy").style.display = isStaff
-        ? "block"
-        : "none";
-      document.getElementById("AddTimeOccupancy").style.display = isStaff
-        ? "block"
-        : "none";
+    document.getElementById("create-account-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("login-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("logout-link").style.display = isLoggedIn
+      ? "block"
+      : "none";
+    document.getElementById("update-occupancy").style.display = isStaff
+      ? "block"
+      : "none";
+    document.getElementById("AddTimeOccupancy").style.display = isStaff
+      ? "block"
+      : "none";
     // Function to create a card for each building
     function createBuildingCard(building) {
       const container = document.createElement("div");

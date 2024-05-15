@@ -82,84 +82,80 @@
     </nav>
 
 
-      <div class="row">
-        <div class="subheadings"></div>
-      </div>
-
-      <div class="row">
-        <div class="favourite-cards" id="favourite-cards"></div>
-      </div>
-
-      <div class="row">
-        <div class="subheadings"></div>
-      </div>
-
-      <div class="row">
-        <div class="building-cards" id="building-cards"></div>
-      </div>
-
-      <!-- *Larry -->
-      <!-- Pop up graph within a drawer after clicking a card (Don't use selectedCardTitle.value) -->
-      <el-drawer
-        v-model="table"
-        title="I have a nested graph inside!"
-        direction="rtl"
-        size="80%"
-      >
-        <!-- Echarts graph component -->
-        <pie-chart></pie-chart>
-      </el-drawer>
+    <div class="row">
+      <div class="subheadings"></div>
     </div>
 
-    <script>
-      // *Larry
-      // Define clickedBuildingName at the top of your script
-      let clickedBuildingName = "";
+    <div class="row">
+      <div class="favourite-cards" id="favourite-cards"></div>
+    </div>
 
-      function logout() {
-        // Remove the user object from sessionStorage
-        sessionStorage.removeItem("user");
-        location.reload();
-      }
-      // Function to check if user is logged in
-      var isLoggedIn = sessionStorage.getItem("user") !== null;
-      console.log("User logged in:", isLoggedIn);
-      var user = sessionStorage.getItem("user");
-      if (user) {
-        user = JSON.parse(user);
-        var isStaff = user.is_staff;
-        console.log("User is staff:", isStaff);
-      }
-      console.log("User:", user);
+    <div class="row">
+      <div class="subheadings"></div>
+    </div>
 
-      // Adjust navbar visibility based on login status
-      document.getElementById("favorites-link").style.display = isLoggedIn
-        ? "block"
-        : "none";
-      document.getElementById("create-account-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("login-link").style.display = isLoggedIn
-        ? "none"
-        : "block";
-      document.getElementById("logout-link").style.display = isLoggedIn
-        ? "block"
-        : "none";
-      document.getElementById("update-occupancy").style.display = isStaff
-        ? "block"
-        : "none";
-      document.getElementById("AddTimeOccupancy").style.display = isStaff
-        ? "block"
-        : "none";
+    <div class="row">
+      <div class="building-cards" id="building-cards"></div>
+    </div>
 
-      // Function to create a card for each building
-      function createBuildingCard(building) {
-        const container = document.createElement("div");
-        container.className = "container";
-        const toggleSwitch = document.createElement("input");
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
+    <!-- *Larry -->
+    <!-- Pop up graph within a drawer after clicking a card (Don't use selectedCardTitle.value) -->
+    <el-drawer v-model="table" title="I have a nested graph inside!" direction="rtl" size="80%">
+      <!-- Echarts graph component -->
+      <pie-chart></pie-chart>
+    </el-drawer>
+  </div>
+
+  <script>
+    // *Larry
+    // Define clickedBuildingName at the top of your script
+    let clickedBuildingName = "";
+
+    function logout() {
+      // Remove the user object from sessionStorage
+      sessionStorage.removeItem("user");
+      // Redirect to home page
+      window.location.href = 'index.html';
+    }
+    // Function to check if user is logged in
+    var isLoggedIn = sessionStorage.getItem("user") !== null;
+    console.log("User logged in:", isLoggedIn);
+    var user = sessionStorage.getItem("user");
+    if (user) {
+      user = JSON.parse(user);
+      var isStaff = user.is_staff;
+      console.log("User is staff:", isStaff);
+    }
+    console.log("User:", user);
+
+    // Adjust navbar visibility based on login status
+    document.getElementById("favorites-link").style.display = isLoggedIn
+      ? "block"
+      : "none";
+    document.getElementById("create-account-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("login-link").style.display = isLoggedIn
+      ? "none"
+      : "block";
+    document.getElementById("logout-link").style.display = isLoggedIn
+      ? "block"
+      : "none";
+    document.getElementById("update-occupancy").style.display = isStaff
+      ? "block"
+      : "none";
+    document.getElementById("AddTimeOccupancy").style.display = isStaff
+      ? "block"
+      : "none";
+
+    // Function to create a card for each building
+    function createBuildingCard(building) {
+      const container = document.createElement("div");
+      container.className = "container";
+      const toggleSwitch = document.createElement("input");
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
               <!-- add image-->
               <img src="${building.image_url}" class="card-img" alt="Building Image">
               <h3 class="card-title">${building.Building_Name}</h3>
@@ -170,170 +166,168 @@
               <br>
             `;
 
-        // Create and append the toggle switch
-        if (sessionStorage.getItem("user") === null) {
-          console.log("User object does not exist in sessionStorage");
-        } else {
-          console.log("User object exists in sessionStorage");
-          toggleSwitch.type = "checkbox";
-          toggleSwitch.className = "card-button";
-          // Check if the building is in the user's favorite buildings array
-          const user = JSON.parse(sessionStorage.getItem("user"));
+      // Create and append the toggle switch
+      if (sessionStorage.getItem("user") === null) {
+        console.log("User object does not exist in sessionStorage");
+      } else {
+        console.log("User object exists in sessionStorage");
+        toggleSwitch.type = "checkbox";
+        toggleSwitch.className = "card-button";
+        // Check if the building is in the user's favorite buildings array
+        const user = JSON.parse(sessionStorage.getItem("user"));
 
-          var foundBuilding = user.favorite_buildings.some(
-            (b) => b._id === building._id
-          );
-          console.log("Found building:", foundBuilding);
-          if (foundBuilding) {
-            toggleSwitch.checked = true;
-            console.log("Building is a favorite:", building);
-          }
-          console.log("User favorite buildings:", user.favorite_buildings);
-          // Create a label element for the switch
-          const labelParagraph = document.createElement("p");
-          labelParagraph.className = "card-button";
-          labelParagraph.textContent = "Add to Favorites";
-
-          card.appendChild(labelParagraph);
-          labelParagraph.appendChild(toggleSwitch);
-          // Add event listener for toggle switch
-          toggleSwitch.addEventListener("change", function (event) {
-            event.stopPropagation();
-
-            const user = JSON.parse(sessionStorage.getItem("user"));
-            if (this.checked) {
-              // Retrieve the building ObjectId
-              user.favorite_buildings.push(building);
-              sessionStorage.setItem("user", JSON.stringify(user));
-            } else {
-              // Remove the building ObjectId from the session storage if unchecked
-              user.favorite_buildings = user.favorite_buildings.filter(
-                (b) => b._id !== building._id
-              );
-            }
-
-            // Save the updated user object back to sessionStorage
-            sessionStorage.setItem("user", JSON.stringify(user));
-            fetch(
-              `http://localhost:3000/api/users/${user.username}/favorite_buildings`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  favorite_buildings: user.favorite_buildings,
-                }),
-              }
-            )
-              .then((response) => response.json())
-              .then((updatedUser) => {
-                console.log(
-                  "User's favorite buildings updated:",
-                  updatedUser.favorite_buildings
-                );
-              })
-              .catch((error) =>
-                console.error(
-                  "Error updating user's favorite buildings:",
-                  error
-                )
-              );
-          });
+        var foundBuilding = user.favorite_buildings.some(
+          (b) => b._id === building._id
+        );
+        console.log("Found building:", foundBuilding);
+        if (foundBuilding) {
+          toggleSwitch.checked = true;
+          console.log("Building is a favorite:", building);
         }
+        console.log("User favorite buildings:", user.favorite_buildings);
+        // Create a label element for the switch
+        const labelParagraph = document.createElement("p");
+        labelParagraph.className = "card-button";
+        labelParagraph.textContent = "Add to Favorites";
 
-        document.body.appendChild(card);
+        card.appendChild(labelParagraph);
+        labelParagraph.appendChild(toggleSwitch);
+        // Add event listener for toggle switch
+        toggleSwitch.addEventListener("change", function (event) {
+          event.stopPropagation();
 
-        // Add click event listener to the card
-        card.addEventListener("click", function (event) {
-          if (toggleSwitch.contains(event.target)) {
-            return;
+          const user = JSON.parse(sessionStorage.getItem("user"));
+          if (this.checked) {
+            // Retrieve the building ObjectId
+            user.favorite_buildings.push(building);
+            sessionStorage.setItem("user", JSON.stringify(user));
+          } else {
+            // Remove the building ObjectId from the session storage if unchecked
+            user.favorite_buildings = user.favorite_buildings.filter(
+              (b) => b._id !== building._id
+            );
           }
-          // Make GET request when card is clicked
-          fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+
+          // Save the updated user object back to sessionStorage
+          sessionStorage.setItem("user", JSON.stringify(user));
+          fetch(
+            `http://localhost:3000/api/users/${user.username}/favorite_buildings`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                favorite_buildings: user.favorite_buildings,
+              }),
+            }
+          )
             .then((response) => response.json())
-            .then((data) => {
-              console.log(data); // You can handle the response data here
-
-              // *Larry
-              // Store the clicked building name
-              console.log("Building clicked:", building.Building_Name);
-              clickedBuildingName = building.Building_Name;
-              // Check the clicked building name and redirect to the appropriate page
-              if (clickedBuildingName === "Unipol Recreation Service") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/barChartUnipol.html";
-              } else if (clickedBuildingName === "Central Library") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/centralLibraryChart.html";
-              } else if (clickedBuildingName === "Science Library") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/scienceLibraryChart.html";
-              } else if (clickedBuildingName === "Law Library") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/lawLibraryChart.html";
-              } else if (clickedBuildingName === "Robertson Library") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/robertsonLibraryChart.html";
-              } else if (clickedBuildingName === "Business School") {
-                window.location.href =
-                  "../pages/charts-and-drawer/html/businessSchoolChart.html";
-              } else {
-                console.log("Building not found");
-              }
+            .then((updatedUser) => {
+              console.log(
+                "User's favorite buildings updated:",
+                updatedUser.favorite_buildings
+              );
             })
-            .catch((error) => console.error("Error fetching building:", error));
+            .catch((error) =>
+              console.error(
+                "Error updating user's favorite buildings:",
+                error
+              )
+            );
         });
-
-        return card;
       }
 
-      // Function to render building cards
-      function renderBuildingCards(buildings) {
-        const buildingCardsContainer =
-          document.getElementById("building-cards");
-        buildings.forEach((building) => {
+      document.body.appendChild(card);
+
+      // Add click event listener to the card
+      card.addEventListener("click", function (event) {
+        if (toggleSwitch.contains(event.target)) {
+          return;
+        }
+        // Make GET request when card is clicked
+        fetch(`http://localhost:3000/api/occupancy/${building._id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data); // You can handle the response data here
+
+            // *Larry
+            // Store the clicked building name
+            console.log("Building clicked:", building.Building_Name);
+            clickedBuildingName = building.Building_Name;
+            // Check the clicked building name and redirect to the appropriate page
+            if (clickedBuildingName === "Unipol Recreation Service") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/barChartUnipol.html";
+            } else if (clickedBuildingName === "Central Library") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/centralLibraryChart.html";
+            } else if (clickedBuildingName === "Science Library") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/scienceLibraryChart.html";
+            } else if (clickedBuildingName === "Law Library") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/lawLibraryChart.html";
+            } else if (clickedBuildingName === "Robertson Library") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/robertsonLibraryChart.html";
+            } else if (clickedBuildingName === "Business School") {
+              window.location.href =
+                "../pages/charts-and-drawer/html/businessSchoolChart.html";
+            } else {
+              console.log("Building not found");
+            }
+          })
+          .catch((error) => console.error("Error fetching building:", error));
+      });
+
+      return card;
+    }
+
+    // Function to render building cards
+    function renderBuildingCards(buildings) {
+      const buildingCardsContainer =
+        document.getElementById("building-cards");
+      buildings.forEach((building) => {
+        const card = createBuildingCard(building);
+        buildingCardsContainer.appendChild(card);
+      });
+    }
+
+    // Function to render building cards based on session storage
+    function renderBuildingCardsBasedOnSession(buildings) {
+      const buildingCardsContainer =
+        document.getElementById("building-cards");
+      buildings.forEach((building) => {
+        // Check if the building ID is present in session storage
+        const isFavorite = sessionStorage.getItem(building._id) === "true";
+        // Render the building card only if it's a favorite
+        if (isFavorite) {
           const card = createBuildingCard(building);
           buildingCardsContainer.appendChild(card);
-        });
-      }
+        }
+      });
+    }
 
-      // Function to render building cards based on session storage
-      function renderBuildingCardsBasedOnSession(buildings) {
-        const buildingCardsContainer =
-          document.getElementById("building-cards");
-        buildings.forEach((building) => {
-          // Check if the building ID is present in session storage
-          const isFavorite = sessionStorage.getItem(building._id) === "true";
-          // Render the building card only if it's a favorite
-          if (isFavorite) {
-            const card = createBuildingCard(building);
-            buildingCardsContainer.appendChild(card);
-          }
-        });
-      }
+    // Fetch buildings data from the API endpoint
+    fetch("http://localhost:3000/api/buildings")
+      .then((response) => response.json())
+      .then((buildings) => {
+        renderBuildingCardsBasedOnSession(buildings);
+      })
+      .catch((error) => console.error("Error fetching buildings:", error));
 
-      // Fetch buildings data from the API endpoint
-      fetch("http://localhost:3000/api/buildings")
-        .then((response) => response.json())
-        .then((buildings) => {
-          renderBuildingCardsBasedOnSession(buildings);
-        })
-        .catch((error) => console.error("Error fetching buildings:", error));
+    // Fetch buildings data from the API endpoint
+    fetch("http://localhost:3000/api/buildings")
+      .then((response) => response.json())
+      .then((buildings) => {
+        renderBuildingCards(buildings);
+      })
+      .catch((error) => console.error("Error fetching buildings:", error));
+  </script>
 
-      // Fetch buildings data from the API endpoint
-      fetch("http://localhost:3000/api/buildings")
-        .then((response) => response.json())
-        .then((buildings) => {
-          renderBuildingCards(buildings);
-        })
-        .catch((error) => console.error("Error fetching buildings:", error));
-    </script>
+  <!-- *Larry -->
+  <script type="module" src="../pages/charts-and-drawer/js/testOfLocations.js"></script>
+</body>
 
-    <!-- *Larry -->
-    <script
-      type="module"
-      src="../pages/charts-and-drawer/js/testOfLocations.js"
-    ></script>
-  </body>
 </html>

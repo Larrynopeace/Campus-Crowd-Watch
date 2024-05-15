@@ -61,11 +61,12 @@
       </ul>
     </nav>
     <script>
-      function logout() {
-        // Remove the user object from sessionStorage
-        sessionStorage.removeItem("user");
-        location.reload();
-      }
+    function logout() {
+      // Remove the user object from sessionStorage
+      sessionStorage.removeItem("user");
+      // Redirect to home page
+      window.location.href = 'index.html';
+    }
       // Function to check if user is logged in
       var isLoggedIn = sessionStorage.getItem("user") !== null;
       console.log("User logged in:", isLoggedIn);
