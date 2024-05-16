@@ -14,12 +14,46 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <!-- Import axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Import css -->
+    <link rel="stylesheet" href="../../main.css" />
 </head>
 
 <body>
     <div id="app">
+
+        <!-- Nav bar -->
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <!-- Always visible -->
+                <li class="navbar-item">
+                    <a href="../../index.html" class="navbar-link">Home</a>
+                </li>
+                <!-- Conditional items -->
+                <li class="navbar-item" id="favorites-link">
+                    <a href="../../favourites.html" class="navbar-link">Favorites</a>
+                </li>
+                <li class="navbar-item" id="create-account-link">
+                    <a href="../../CreateAccount.html" class="navbar-link">Create Account</a>
+                </li>
+                <li class="navbar-item" id="login-link">
+                    <a href="../../login.html" class="navbar-link">Login</a>
+                </li>
+                <li class="navbar-item" id="update-occupancy">
+                    <a href="../../buildingUpdates.html" class="navbar-link">Update Occupancy</a>
+                </li>
+                <li class="navbar-item" id="AddTimeOccupancy">
+                    <a href="../../AddTimeOccupancy.html" class="navbar-link">Add Occupancy to database</a>
+                </li>
+                <!-- Added a logout method -->
+                <li class="navbar-item" id="logout-link" @click="logout">
+                    <a href="#" class="navbar-link">Logout</a>
+                </li>
+            </ul>
+        </nav>
         
             <!-- Echarts graph component -->
+            <br><br><br>
             <law-library></law-library>
 
     </div>

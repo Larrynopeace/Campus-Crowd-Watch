@@ -12,6 +12,12 @@ const app = createApp({
             table.value = true
         }
 
+        // A method to log out (remove the session storage) and redirect to the index page
+        const logout = () => {
+            sessionStorage.removeItem("user");
+            window.location.href = '../../index.html'
+        }
+
         // This function will be called when the component is mounted
         onMounted(() => {
             console.log('Component is mounted')
@@ -25,6 +31,7 @@ const app = createApp({
 
             // Function
             openTable,
+            logout
         }
     }
 })
@@ -38,7 +45,7 @@ import RobertsonLibrary from './component/barChartRobertsonLibrary.js';
 import BusinessSchool from './component/barChartBusinessSchool.js';
 // Summary of the current occupancy of all buildings
 import pieChart from './component/pieChart.js'; 
-// 2. Register the component
+// 2. Register the components
 app.component('bar-chart', BarChart);
 app.component('central-library', CentralLibrary);
 app.component('science-library', ScienceLibrary);
