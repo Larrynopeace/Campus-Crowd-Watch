@@ -1,65 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>My HTML File</title>
-    <!-- Add your script tags here to import libraries in the head -->
-    <!-- Import style -->
-    <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
-    <!-- Import Vue 3 -->
-    <script src="//unpkg.com/vue@3"></script>
-    <!-- Import component library -->
-    <script src="//unpkg.com/element-plus"></script>
-    <!-- Import ECharts -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <!-- Import axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <!-- Import css -->
-    <link rel="stylesheet" href="../../main.css" />
+  <meta charset="UTF-8" />
+  <title>Central Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="../../main.css" />
+  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Raleway:wght@600&display=swap" rel="stylesheet" />
+  <script src="//unpkg.com/vue@3"></script>
+  <script src="//unpkg.com/element-plus"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <div id="app">
+  <div id="app">
 
-        <!-- Nav bar -->
-        <nav class="navbar">
-            <ul class="navbar-list">
-                <!-- Always visible -->
-                <li class="navbar-item">
-                    <a href="../../index.html" class="navbar-link">Home</a>
-                </li>
-                <!-- Conditional items -->
-                <li class="navbar-item" id="favorites-link">
-                    <a href="../../favourites.html" class="navbar-link">Favorites</a>
-                </li>
-                <li class="navbar-item" id="create-account-link">
-                    <a href="../../CreateAccount.html" class="navbar-link">Create Account</a>
-                </li>
-                <li class="navbar-item" id="login-link">
-                    <a href="../../login.html" class="navbar-link">Login</a>
-                </li>
-                <li class="navbar-item" id="update-occupancy">
-                    <a href="../../buildingUpdates.html" class="navbar-link">Update Occupancy</a>
-                </li>
-                <li class="navbar-item" id="AddTimeOccupancy">
-                    <a href="../../AddTimeOccupancy.html" class="navbar-link">Add Occupancy to database</a>
-                </li>
-                <!-- Added a logout method -->
-                <li class="navbar-item" id="logout-link" @click="logout">
-                    <a href="#" class="navbar-link">Logout</a>
-                </li>
-            </ul>
-        </nav>
-        
-            <!-- Echarts graph component -->
-            <br><br><br>
-            <central-library></central-library>
+    <!-- Nav bar -->
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <!-- Always visible -->
+        <li class="navbar-item">
+          <a href="../../index.html" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="locations.html" class="navbar-link">Locations</a>
+        </li>
 
-    </div>
+        <!-- Conditional items -->
+        <li class="navbar-item" id="favorites-link" style="display: none">
+          <a href="../../favourites.html" class="navbar-link">Favorites</a>
+        </li>
+        <li class="navbar-item" id="create-account-link" style="display: none">
+          <a href="../../CreateAccount.html" class="navbar-link">Create Account</a>
+        </li>
+        <li class="navbar-item" id="login-link" style="display: none">
+          <a href="../../login.html" class="navbar-link">Login</a>
+        </li>
+        <li class="navbar-item" id="update-occupancy" style="display: none">
+          <a href="../../buildingUpdates.html" class="navbar-link">Update Occupancy</a>
+        </li>
+        <li class="navbar-item" id="AddTimeOccupancy" style="display: none">
+          <a href="../../AddTimeOccupancy.html" class="navbar-link">Add Occupancy to database</a>
+        </li>
+        <!-- Added a logout method -->
+        <li class="navbar-item" id="logout-link" style="display: none" onclick="logout()">
+          <a href="#" class="navbar-link">Logout</a>
+        </li>
+      </ul>
+    </nav>
 
-    <!-- Add your script tags here to import controller at the end of the body -->
-    <script type="module" src="../js/testOfLocations.js"></script>
+    <!-- Echarts graph component -->
+    <br><br><br>
+    <central-library></central-library>
+
+  </div>
+
+  <script>
+    function logout() {
+      sessionStorage.removeItem("user");
+      window.location.href = '../../index.html';
+    }
+
+    var isLoggedIn = sessionStorage.getItem("user") !== null;
+    console.log("User logged in:", isLoggedIn);
+    var user = sessionStorage.getItem("user");
+    if (user) {
+      user = JSON.parse(user);
+      var isStaff = user.is_staff;
+      console.log("User is staff:", isStaff);
+    }
+    console.log("User:", user);
+
+    document.getElementById("favorites-link").style.display = isLoggedIn ? "block" : "none";
+    document.getElementById("create-account-link").style.display = isLoggedIn ? "none" : "block";
+    document.getElementById("login-link").style.display = isLoggedIn ? "none" : "block";
+    document.getElementById("logout-link").style.display = isLoggedIn ? "block" : "none";
+    document.getElementById("update-occupancy").style.display = isStaff ? "block" : "none";
+    document.getElementById("AddTimeOccupancy").style.display = isStaff ? "block" : "none";
+  </script>
+
+  <script type="module" src="../js/testOfLocations.js"></script>
 </body>
 
 </html>
