@@ -27,7 +27,7 @@ export default {
                             console.log(`Building ${item.Building_Name} has occupancy over 200: ${item.Current_Occupancy}`);
 
                             // Send email to user when the occupancy is over 200
-                            axios.post('http://localhost:3000/send-email', {
+                            /* axios.post('http://localhost:3000/send-email', {
                                 email: '2501990530@qq.com', // Replace with your testing receiver email
                                 buildingName: item.Building_Name,
                                 currentOccupancy: item.Current_Occupancy
@@ -37,7 +37,7 @@ export default {
                                 })
                                 .catch(error => {
                                     console.log(error);
-                                });
+                                }); */
                         }
 
                         return {
